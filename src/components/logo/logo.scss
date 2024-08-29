@@ -1,0 +1,44 @@
+.logo {
+  position: relative;
+  width: 120px;
+  user-select: none;
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__text {
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-size: 30px;
+    font-weight: 900;
+    color: #34404b;
+  }
+  &__title {
+    text-align: center;
+    opacity: 0.9;
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: #3d454d;
+  }
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 350px) {
+  .logo {
+    width: 90px;
+    &__text {
+      font-size: 20px;
+    }
+    &__title {
+      font-size: 8px;
+    }
+  }
+}

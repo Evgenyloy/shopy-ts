@@ -1,0 +1,132 @@
+.arrivals {
+  display: flex;
+  flex-direction: column;
+  padding: 50px 0;
+
+  &__text-block {
+    margin-bottom: 75px;
+    text-align: center;
+  }
+  &__title {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 30px;
+    color: #34404b;
+    margin-bottom: 15px;
+    span {
+      margin-right: 10px;
+      color: #ff5912;
+    }
+  }
+  &__sub-title {
+    font-size: 16px;
+    color: #34404b;
+  }
+  &__card-inner {
+    position: relative;
+    min-height: 375px;
+    margin-bottom: 70px;
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-auto-rows: 375px;
+  }
+  &__item {
+    position: relative;
+    background-color: #fff;
+    transition: all 0.1s linear;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    }
+  }
+  &__img-cont {
+    position: relative;
+    width: 145px;
+    height: 200px;
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  &__img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  &__item-title {
+    font-family: 'Harmonia Sans Pro Cyr';
+    text-align: center;
+    color: #34404b;
+    width: 200px;
+    height: 75px;
+    overflow: hidden;
+    margin: 0 auto;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  &__item-price {
+    position: absolute;
+    left: 50%;
+    bottom: 6%;
+    transform: translate(-50%, -6%);
+    text-align: center;
+    color: #ff5912;
+    font-weight: 600;
+    font-size: 18px;
+  }
+  &__link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  &__btn-cont {
+    height: 80px;
+    width: 100%;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &__btn-link {
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #ff5912;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 2px;
+    transition: all 0.1s linear;
+    &:hover {
+      background-color: #ff3300;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .arrivals__title {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 995px) {
+  .arrivals {
+    &__card-inner {
+      gap: 20px;
+      grid-template-columns: repeat(2, minmax(220px, 1fr));
+      justify-content: center;
+
+      min-height: 770px;
+    }
+  }
+}
+@media (max-width: 490px) {
+  .arrivals {
+    &__card-inner {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 300px));
+      min-height: 1560px;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.header {
+  grid-area: header;
+}
+
+@media (max-width: 650px) {
+  .header {
+    background-color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+}

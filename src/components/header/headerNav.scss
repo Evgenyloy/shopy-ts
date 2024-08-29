@@ -1,0 +1,34 @@
+.headerNav {
+  &__link {
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-size: 16px;
+    font-weight: 600;
+    color: #34404b;
+    transition: all 0.1s linear;
+    &:hover {
+      color: #ff5912;
+    }
+  }
+  &__item {
+    user-select: none;
+  }
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 270px;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 800px) {
+  .headerNav__inner {
+    gap: 15px;
+  }
+}
+
+@media (max-width: 650px) {
+  .headerNav {
+    display: none;
+  }
+}
