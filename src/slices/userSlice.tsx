@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IOrder, IProduct } from '../types/types';
 
 const userData = JSON.parse(
   localStorage.getItem(

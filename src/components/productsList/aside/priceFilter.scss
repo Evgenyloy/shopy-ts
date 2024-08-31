@@ -1,0 +1,25 @@
+.price-filter {
+  padding: 40px;
+  background-color: #fff;
+  max-width: 268px;
+}
+
+@media (max-width: 800px) {
+  .price-filter {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 650px) {
+  .price-filter {
+    padding: 10px;
+    height: auto;
+    margin-bottom: 0;
+    background-color: transparent;
+  }
+}
+@media (max-width: 300px) {
+  .price-filter {
+    padding: 5px;
+  }
+}

@@ -1,6 +1,6 @@
 import HeaderContacts from './HeaderContacts';
 import HeaderMain from './HeaderMain';
-
+import Popup from './Popup';
 import './header.scss';
 
 const Header = () => {
@@ -8,6 +8,7 @@ const Header = () => {
     <header className="header">
       <HeaderContacts />
       <HeaderMain />
+      <Popup />
     </header>
   );
 };

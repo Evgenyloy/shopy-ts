@@ -14,7 +14,7 @@ function Intro() {
         </div>
       </div>
       <div className="intro__img-cont">
-        <img className="intro__img" src={intoImg} alt="intro" />
+        <img className="intro__img" src={intoImg} alt="intro-image" />
       </div>
     </div>
   );

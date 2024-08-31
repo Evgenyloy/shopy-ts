@@ -1,15 +1,16 @@
 import logo from '../../image/layers.png';
 import { Link } from 'react-router-dom';
-import { FC } from 'react';
+import { useAppDispatch } from '../../hooks/hooks';
+import { changePopUp } from '../../slices/popupSlice';
 import './logo.scss';
 
-/* interface ILogeProps {
-  (): void;
-} */
-
-const Logo: FC = (props) => {
+const Logo = () => {
+  const dispatch = useAppDispatch();
+  const handLogoClick = () => {
+    dispatch(changePopUp());
+  };
   return (
-    <div className="logo" /* onClick={props.onClick} */>
+    <div className="logo" onClick={handLogoClick}>
       <div className="logo__inner">
         <span className="logo__text">SH</span>
         <img src={logo} alt="logo" className="logo__img" />

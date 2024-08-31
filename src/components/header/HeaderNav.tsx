@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import './headerNav.scss';
+import { FC } from 'react';
 
-function HeaderNav(
-  {
-    /* handleClick  */
-  }
-) {
+interface IHeaderNavProps {
+  handleClick?: () => void;
+}
+
+const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
   return (
     <nav className="headerNav">
       <ul className="headerNav__inner">
@@ -16,7 +17,7 @@ function HeaderNav(
             className={(isActive) =>
               'headerNav__link' + (isActive ? ' red' : ' unselected')
             }
-            /* onClick={handleClick} */
+            onClick={handleClick}
           >
             Home
           </NavLink>
@@ -29,7 +30,7 @@ function HeaderNav(
             className={(isActive) =>
               'headerNav__link' + (isActive ? ' red' : ' unselected')
             }
-            /* onClick={handleClick} */
+            onClick={handleClick}
           >
             Products
           </NavLink>
@@ -38,7 +39,7 @@ function HeaderNav(
           <NavLink
             end
             to="/about"
-            /*  onClick={handleClick} */
+            onClick={handleClick}
             className={(isActive) =>
               'headerNav__link' + (isActive ? ' red' : ' unselected')
             }
@@ -49,6 +50,6 @@ function HeaderNav(
       </ul>
     </nav>
   );
-}
+};
 
 export default HeaderNav;

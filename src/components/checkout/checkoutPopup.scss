@@ -1,0 +1,66 @@
+.checkout-popup {
+  z-index: 900;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  &__text-block {
+    padding: 70px 50px 0;
+    text-align: center;
+    z-index: 1000;
+    pointer-events: fill;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 250px;
+    background-color: #fff;
+    border-radius: 5px;
+  }
+  &__text {
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-weight: 400;
+    font-size: 20px;
+    color: #3b3f42;
+    margin-bottom: 60px;
+  }
+  &__button {
+    display: inline;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff5912;
+    transition: 0.1s linear;
+    cursor: pointer;
+    &:hover {
+      background-color: #ff3300;
+    }
+  }
+}
+
+.opacity {
+  opacity: 0;
+  visibility: 0;
+}
+
+//CSSTransition--------------------------------------
+.my-node-enter {
+  opacity: 0;
+}
+.my-node-enter-active {
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+.my-node-exit {
+  opacity: 1;
+}
+.my-node-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s;
+}

@@ -1,0 +1,9 @@
+.aside {
+  grid-area: aside;
+}
+@media (max-width: 650px) {
+  .aside {
+    display: flex;
+    justify-content: space-around;
+  }
+}

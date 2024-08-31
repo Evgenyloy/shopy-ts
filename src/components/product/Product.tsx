@@ -77,19 +77,19 @@ const Product = () => {
       : dispatch(addFavoriteItem(item));
   };
 
-  const clazz = favorites.some((i) => {
-    return i.id == product?.id;
-  })
-    ? 'product__svg product__svg--red'
-    : 'product__svg';
-
-  const clazz2 = orders.some((i) => {
-    return i.id == product?.id;
-  })
-    ? 'product__svg product__svg--red'
-    : 'product__svg';
-
   const renderProductItem = (product: IProduct) => {
+    const clazz = favorites.some((i) => {
+      return i.id == product?.id;
+    })
+      ? 'product__svg product__svg--red'
+      : 'product__svg';
+
+    const clazz2 = orders.some((i) => {
+      return i.id == product?.id;
+    })
+      ? 'product__svg product__svg--red'
+      : 'product__svg';
+
     return (
       <>
         <div className="product__img-cont">

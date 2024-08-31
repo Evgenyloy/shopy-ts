@@ -1,0 +1,136 @@
+.checkout {
+  background-color: #f7f4f4;
+
+  &__inner {
+    padding: 100px 150px;
+  }
+  &__item {
+    color: #34404b;
+    transition: all 0.1s linear;
+    &:hover {
+      color: #ff5912;
+    }
+  }
+  &__title,
+  &__details {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 25px;
+    color: #34404b;
+    margin-bottom: 40px;
+  }
+  &__input-inner {
+    margin-bottom: 80px;
+  }
+  &__input-cont {
+    position: relative;
+    margin-bottom: 20px;
+
+    &.active .checkout__email-label {
+      top: 12px;
+      font-size: 14px;
+    }
+    &.active .checkout__name-label {
+      top: 12px;
+      font-size: 14px;
+    }
+    &.active .checkout__tel-label {
+      top: 12px;
+      font-size: 14px;
+    }
+  }
+  &__input-wrapper {
+    margin-bottom: 70px;
+  }
+  &__input {
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 31px 12px 11px;
+    line-height: 22px;
+    outline: none;
+    background: #fff;
+    font-size: 16px;
+    transition: all 0.2s linear;
+    position: relative;
+    color: #333;
+    height: 64px;
+    &:focus {
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      appearance: none;
+    }
+  }
+  &__email-label,
+  &__tel-label,
+  &__name-label {
+    position: absolute;
+    top: 22px;
+    font-size: 16px;
+    left: 12px;
+    transition: all 0.15s ease-in-out;
+    pointer-events: none;
+    color: #8c8c8c;
+    z-index: 10;
+  }
+  &__orders {
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-size: 18.1px;
+    font-weight: 400;
+    color: #34404b;
+
+    margin-bottom: 85px;
+  }
+  &__order-item {
+    display: grid;
+    grid-template-columns: 1fr 70px 70px;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  &__description {
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-size: 16px;
+    font-weight: 400;
+    color: #34404b;
+  }
+  &__total {
+    color: #34404b;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    span {
+      color: #ff5912;
+    }
+  }
+  &__button {
+    display: inline;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: none;
+    background-color: #ff5912;
+    align-self: center;
+    justify-self: center;
+    transition: 0.1s linear;
+    /*  margin-bottom: 30px; */
+    &:hover {
+      background-color: #ff3300;
+    }
+  }
+  &__input-error {
+    position: absolute;
+    bottom: -14px;
+    left: 0;
+    font-size: 11px;
+    color: #ff3300;
+  }
+}
+
+.input-error {
+  border: 1px solid #ff3300;
+}

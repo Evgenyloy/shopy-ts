@@ -1,26 +1,31 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import Logo from '../logo/Logo';
 import HeaderNav from './HeaderNav';
-/* import HeaderTools from './HeaderTools';
-import { changePopUp } from '../../../store/slices/popupSlice';
-import { categoryChange } from '../../products/aside/categories/categoriesSlice';
-import { radioFilterChanged } from '../../products/aside/priceFilter/PriceFilterRadio/priceFilterRadioSlice';
+import HeaderTools from './HeaderTools';
+import { changePopUp } from '../../slices/popupSlice';
+import { categoryChange } from '../../slices/categoriesSlice';
+import { radioFilterChanged } from '../../slices/priceFilterRadioSlice';
 import {
   minPriceFilterChanged,
   maxPriceFilterChanged,
-} from '../../products/aside/priceFilter/priceFilterRange/PriceFilterRangeSlice'; */
+} from '../../slices/PriceFilterRangeSlice';
 
 import './headerMain.scss';
 
 const HeaderMain = () => {
-  /*  const { popupVisible } = useSelector((state) => state.popup);
-  const dispatch = useDispatch();
+  const { popupVisible } = useAppSelector((state) => state.popup);
+  const dispatch = useAppDispatch();
 
-  const category = useSelector((state) => state.category.categories);
-  const radio = useSelector((state) => state.radioFilter.radioFilter);
-  const { minPrice, maxPrice } = useSelector((state) => state.rangeFilter);
+  const category = useAppSelector((state) => state.category.categories);
+  const radio = useAppSelector((state) => state.radioFilter.radioFilter);
+  const { minPrice, maxPrice } = useAppSelector((state) => state.rangeFilter);
 
-  const handleClick = (category, radio, minPrice, maxPrice) => {
+  const handleClick = (
+    category: string,
+    radio: string,
+    minPrice: number,
+    maxPrice: number
+  ) => {
     if (category !== 'all') {
       dispatch(categoryChange('all'));
     }
@@ -31,13 +36,13 @@ const HeaderMain = () => {
       dispatch(minPriceFilterChanged(0));
       dispatch(maxPriceFilterChanged(1000));
     }
-  }; */
+  };
 
-  /*  const onButtonClick = () => {
+  const onButtonClick = () => {
     dispatch(changePopUp());
-  }; */
+  };
 
-  /* const burgerClassName = popupVisible ? 'burger active' : 'burger'; */
+  const burgerClassName = popupVisible ? 'burger active' : 'burger';
 
   return (
     <div className="headerMain">
@@ -45,12 +50,12 @@ const HeaderMain = () => {
         <div className="headerMain__inner">
           <Logo />
           <HeaderNav
-          /* handleClick={() => handleClick(category, radio, minPrice, maxPrice)} */
-          />
-          {/*  <HeaderTools
             handleClick={() => handleClick(category, radio, minPrice, maxPrice)}
-          /> */}
-          <div /* className={burgerClassName} onClick={onButtonClick} */>
+          />
+          <HeaderTools
+            handleClick={() => handleClick(category, radio, minPrice, maxPrice)}
+          />
+          <div className={burgerClassName} onClick={onButtonClick}>
             <span className="burger__line"></span>
             <span className="burger__line"></span>
             <span className="burger__line"></span>

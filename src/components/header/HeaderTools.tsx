@@ -1,20 +1,25 @@
-/* import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getAuth, signOut } from 'firebase/auth';
+//import { getAuth, signOut } from 'firebase/auth';
 import { PiShoppingCartSimpleBold } from 'react-icons/pi';
 import { AiFillHeart } from 'react-icons/ai';
 import { SlLogin, SlLogout } from 'react-icons/sl';
-import { removeUser } from '../../../../store/slices/userSlice';
-import { useAuth } from '../../../../hooks/use-auth';
-import { changePopUp } from '../../../../store/slices/popupSlice';
+import { removeUser } from '../../slices/userSlice';
+import { useAuth } from '../../hooks/hooks';
+//import { changePopUp } from '../../../../store/slices/popupSlice';
 
 import './headerTools.scss';
+import { FC } from 'react';
 
-function HeaderTools({ handleClick }) {
+interface IHeaderToolsProps {
+  handleClick: () => void;
+}
+
+const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
   const dispatch = useDispatch();
   const { user, orders, favorites, isAuth } = useAuth();
 
-  const logOut = () => {
+  /*   const logOut = () => {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
@@ -25,12 +30,11 @@ function HeaderTools({ handleClick }) {
       .catch((error) => {
         alert(error);
       });
-  };
+  }; */
 
   return (
     <div className="header-tools">
       <NavLink
-        exact
         onClick={handleClick}
         to={'/basket'}
         className={(isActive) =>
@@ -44,7 +48,6 @@ function HeaderTools({ handleClick }) {
         </span>
       </NavLink>
       <NavLink
-        exact
         onClick={handleClick}
         to="/favorites"
         className={(isActive) =>
@@ -58,7 +61,7 @@ function HeaderTools({ handleClick }) {
         </span>
       </NavLink>
       {isAuth ? (
-        <div className="header-tools__item" onClick={logOut}>
+        <div className="header-tools__item" /* onClick={logOut} */>
           <SlLogout />
         </div>
       ) : (
@@ -70,9 +73,6 @@ function HeaderTools({ handleClick }) {
       <p className="header-tools__user">{user ? user?.email : null}</p>
     </div>
   );
-}
+};
 
 export default HeaderTools;
- */
-
-export {};

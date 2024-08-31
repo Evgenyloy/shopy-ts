@@ -1,0 +1,88 @@
+.price-filter {
+  padding: 40px 40px;
+  background-color: #fff;
+  max-width: 268px;
+
+  &__title {
+    font-family: 'Harmonia Sans Pro Cyr';
+    font-size: 20px;
+    font-weight: 900;
+    color: #34404b;
+    margin-bottom: 30px;
+  }
+  &__span {
+    font-size: 14px;
+    font-weight: 600;
+    color: #34404b;
+    margin-left: 2px;
+  }
+
+  &__span-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  &__wrapper {
+    margin-bottom: 30px;
+  }
+}
+
+.example-track {
+  height: 2px;
+  background-color: #c2c4c5;
+}
+
+.example-thumb.example-thumb-0[aria-label='Lower thumb'] {
+  background-color: #fff;
+  height: 18px;
+  width: 18px;
+  border: 2.5px solid #34404b;
+  top: -7px;
+  border-radius: 3px;
+}
+.example-thumb.example-thumb-1[aria-label='Upper thumb'] {
+  background-color: #fff;
+  height: 18px;
+  width: 18px;
+  border: 2.5px solid #34404b;
+  border-radius: 3px;
+  top: -7px;
+}
+
+.horizontal-slider {
+  width: 175px;
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: -5px;
+    width: 5px;
+    height: 2px;
+    background-color: #c2c4c5;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: -5px;
+    width: 5px;
+    height: 2px;
+    background-color: #c2c4c5;
+  }
+}
+
+@media (max-width: 650px) {
+  .price-filter__wrapper {
+    display: none;
+  }
+  .price-filter__title {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+}
+@media (max-width: 800px) {
+  .horizontal-slider {
+    width: 100%;
+  }
+}
