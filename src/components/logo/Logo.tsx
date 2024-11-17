@@ -1,12 +1,15 @@
 import logo from '../../image/layers.png';
 import { Link } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { changePopUp } from '../../slices/popupSlice';
 import './logo.scss';
 
 const Logo = () => {
   const dispatch = useAppDispatch();
+  const popupVisible = useAppSelector((state) => state.popup.popupVisible);
+
   const handLogoClick = () => {
+    if (!popupVisible) return;
     dispatch(changePopUp());
   };
   return (

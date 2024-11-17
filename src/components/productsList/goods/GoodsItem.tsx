@@ -2,12 +2,10 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { PiShoppingCartSimpleBold } from 'react-icons/pi';
+import { RxCross1 } from 'react-icons/rx';
 import { useAuth } from '../../../hooks/hooks';
-import {
-  addFavoriteItem,
-  removeFavoriteItem,
-} from '../../../slices/favoriteProductsSlice';
-import { removeOrder, addOrder } from '../../../slices/orderListSlice';
+import { addFavoriteItem, removeFavoriteItem } from '../../../slices/userSlice';
+import { removeOrder, addOrder } from '../../../slices/userSlice';
 import { Rating } from 'react-simple-star-rating';
 import { checkAvailability } from '../../../utils/utils';
 import { FC } from 'react';
@@ -15,9 +13,10 @@ import { IOrder, IProduct } from '../../../types/types';
 
 interface IGoodsItemProps {
   item: IProduct;
+  cross?: boolean;
 }
 
-const GoodsItem: FC<IGoodsItemProps> = ({ item }) => {
+const GoodsItem: FC<IGoodsItemProps> = ({ item, cross }) => {
   const dispatch = useDispatch();
   const { favorites, orders } = useAuth();
 
@@ -83,6 +82,12 @@ const GoodsItem: FC<IGoodsItemProps> = ({ item }) => {
         className="goods__link"
         onClick={() => window.scrollTo(0, 0)}
       ></Link>
+      {cross && (
+        <RxCross1
+          className="goods__item-cross"
+          onClick={() => handleFavoriteClick(favorites, item)}
+        />
+      )}
     </div>
   );
 };

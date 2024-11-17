@@ -5,15 +5,8 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { MdArrowBackIos } from 'react-icons/md';
 import { IoIosBasket } from 'react-icons/io';
 import { HiPlusSmall, HiOutlineMinusSmall } from 'react-icons/hi2';
-import {
-  removeOrder,
-  addOrder,
-  changeQuantity,
-} from '../../slices/orderListSlice';
-import {
-  removeFavoriteItem,
-  addFavoriteItem,
-} from '../../slices/favoriteProductsSlice';
+import { removeOrder, addOrder, changeQuantity } from '../../slices/userSlice';
+import { removeFavoriteItem, addFavoriteItem } from '../../slices/userSlice';
 import { useGetASingleProductQuery } from '../../api/apiSlice';
 import { useAuth } from '../../hooks/hooks';
 import Spinner from '../spinner/Spinner';
@@ -33,8 +26,6 @@ const Product = () => {
     isSuccess,
   } = useGetASingleProductQuery(id as string);
   const dispatch = useDispatch();
-
-  console.log(product);
 
   const orderItem = orders.filter((order) => order.id === product?.id);
 

@@ -14,8 +14,8 @@ const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
           <NavLink
             end
             to="/"
-            className={(isActive) =>
-              'headerNav__link' + (isActive ? ' red' : ' unselected')
+            className={({ isActive }) =>
+              isActive ? 'headerNav__link red' : ' headerNav__link'
             }
             onClick={handleClick}
           >
@@ -25,10 +25,9 @@ const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
 
         <li className="headerNav__item">
           <NavLink
-            end
             to="/products"
-            className={(isActive) =>
-              'headerNav__link' + (isActive ? ' red' : ' unselected')
+            className={({ isActive }) =>
+              isActive ? 'headerNav__link red' : ' headerNav__link'
             }
             onClick={handleClick}
           >
@@ -37,11 +36,10 @@ const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
         </li>
         <li className="headerNav__item">
           <NavLink
-            end
             to="/about"
             onClick={handleClick}
-            className={(isActive) =>
-              'headerNav__link' + (isActive ? ' red' : ' unselected')
+            className={({ isActive }) =>
+              isActive ? 'headerNav__link red' : ' headerNav__link'
             }
           >
             About

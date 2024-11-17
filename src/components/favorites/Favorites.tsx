@@ -11,10 +11,11 @@ function Favorites() {
   const renderItem = favorites.map((item) => {
     return (
       <React.Fragment key={item.id}>
-        <GoodsItem item={item} />
+        <GoodsItem item={item} cross />
       </React.Fragment>
     );
   });
+
   return (
     <div className="favorites">
       <div className="container">

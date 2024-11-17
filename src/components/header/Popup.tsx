@@ -63,7 +63,7 @@ const Popup = () => {
         enter: 400,
         exit: 400,
       }}
-      mountOnEnter
+      /* mountOnEnter */
       unmountOnExit
       classNames="transition-popup"
     >

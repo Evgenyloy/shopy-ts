@@ -1,19 +1,22 @@
 import './spinner.scss';
 
-const Spinner = ({ isLoading }: any) => {
+const Spinner = (props: any) => {
+  const { isLoading, width, height, className } = props;
   let spinnerClassName = isLoading ? 'spinner' : 'spinner hidden';
 
   return (
-    <div className={spinnerClassName}>
+    <div className={className ? className : spinnerClassName}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         //xlink="http://www.w3.org/1999/xlink"
         style={{
           background: 'transparent',
           shapeRendering: 'auto',
+          width: width,
+          height: height,
         }}
-        width="150px"
-        height="150px"
+        /* width={'150px'}
+        height={'150px'} */
         viewBox="0 0 100 100"
         preserveAspectRatio="xMidYMid"
       >

@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { BsXLg } from 'react-icons/bs';
-import { changeQuantity, removeOrder } from '../../slices/orderListSlice';
+import { changeQuantity, removeOrder } from '../../slices/userSlice';
 import { IOrder } from '../../types/types';
 
 interface IBasketItemProps {

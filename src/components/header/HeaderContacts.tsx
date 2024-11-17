@@ -14,7 +14,7 @@ const HeaderContacts = () => {
               <IoMdMailOpen /> info@shopy.com
             </div>
             <div className="contacts__tel">
-              <BsFillTelephoneFill /> 996 - 5553 - 453
+              <BsFillTelephoneFill /> 996 - 5553 - 453 evgenyloy@gmail.com
             </div>
           </div>
           <div className="header-contacts__inner-col2">

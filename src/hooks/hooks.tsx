@@ -6,11 +6,11 @@ export const useAppSelector = useSelector.withTypes<RootState>();
 
 export function useAuth() {
   const { user } = useAppSelector((state) => state.user);
-  const { orders } = useAppSelector((state) => state.orderList);
-  const { favorites } = useAppSelector((state) => state.favoriteProducts);
+  const { orders } = useAppSelector((state) => state.user);
+  const { favorites } = useAppSelector((state) => state.user);
 
   return {
-    isAuth: !!user,
+    isAuth: !!user?.uid,
     favorites,
     orders,
     user,

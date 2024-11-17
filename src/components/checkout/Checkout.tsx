@@ -2,7 +2,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import { deleteOrders } from '../../slices/orderListSlice';
+import { deleteOrders } from '../../slices/userSlice';
 import { Link } from 'react-router-dom';
 import CheckoutPopup from './CheckoutPopup';
 
@@ -61,7 +61,7 @@ const Checkout = () => {
   };
 
   const [popup, setPopup] = useState(false);
-  const orders = useAppSelector((state) => state.orderList.orders);
+  const orders = useAppSelector((state) => state.user.orders);
   const dispatch = useAppDispatch();
 
   const handleButtonClick = () => {

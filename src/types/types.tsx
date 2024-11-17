@@ -26,3 +26,10 @@ export interface IOrder {
   title: string;
   description: string;
 }
+
+export interface IFirebaseUserData {
+  email: string;
+  favorites: IProduct[];
+  id: string;
+  orders: IOrder[];
+}

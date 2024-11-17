@@ -1,4 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { doc, getFirestore, updateDoc } from 'firebase/firestore';
+import { useAuth } from '../../hooks/hooks';
+
 import Header from '../header/Header';
 import HomePage from '../homePage/HomePage';
 import MainLayout from '../mainLayout/MainLayout';
@@ -8,8 +12,35 @@ import ProductsList from '../productsList/productsList/ProductsList';
 import Basket from '../basket/Basket';
 import Checkout from '../checkout/Checkout';
 import Favorites from '../favorites/Favorites';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../registerPage/RegisterPage';
 
 function App() {
+  const { orders, favorites, user, isAuth } = useAuth();
+  const updateUserInformation = async (user: any) => {
+    const db = getFirestore();
+    const userRef = doc(db, 'users', `${user.email}`);
+    await updateDoc(userRef, {
+      orders,
+      favorites,
+    });
+  };
+
+  useEffect(() => {
+    if (isAuth) {
+      updateUserInformation(user);
+      console.log('updateUserInformation');
+    }
+    /*  if (!isAuth) {
+      console.log('!isAuth');
+      return;
+    } */
+    localStorage.setItem(
+      'userData',
+      JSON.stringify({ orders, favorites, email: '', uid: '' })
+    );
+  }, [orders, favorites]);
+
   return (
     <Router>
       <div className="App">
@@ -22,6 +53,8 @@ function App() {
             <Route path="/basket" element={<Basket />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/favorites" element={<Favorites />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
           </Route>
         </Routes>
         <Footer />
