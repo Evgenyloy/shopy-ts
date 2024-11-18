@@ -14,8 +14,15 @@ import {
   removeFavoriteItem,
 } from '../../slices/userSlice';
 import { useAuth } from '../../hooks/hooks';
-import { setEmailError, setPasswordError } from '../../slices/errorSlice';
-import { spinnerChanged } from '../../slices/spinnersSlice';
+import { setEmailError, setPasswordError } from '../../slices/errorFormSlice';
+import {
+  authenticationFetched,
+  authenticationFetching,
+  authenticationFetchingError,
+  databaseFetched,
+  databaseFetching,
+  databaseFetchingError,
+} from '../../slices/loginSlice';
 import Form from '../form/Form';
 
 function SignUp() {
@@ -51,7 +58,8 @@ function SignUp() {
 
   //--Создание пользователя ----------------------------------------------------
   const handleRegister = (email: string, password: string) => {
-    dispatch(spinnerChanged(true));
+    dispatch(authenticationFetching());
+    dispatch(databaseFetching());
     const auth = getAuth();
     setPersistence(auth, browserLocalPersistence)
       .then(() => {
@@ -59,16 +67,20 @@ function SignUp() {
           .then(({ user }) => {
             //----------------------------------------------------------------------------
             dispatch(setUser({ uid: user.uid, email: user.email }));
+            dispatch(authenticationFetched());
             //--сохранение пользователя в базе данных--------------------------------------------------
-            saveInDataBase(user.email as string, user.uid);
+            saveInDataBase(user.email as string, user.uid)
+              .then((data) => dispatch(databaseFetched()))
+              .catch((error: Error) => dispatch(databaseFetchingError()));
             //----------------------------------------------------------------------------
-            dispatch(spinnerChanged(false));
+
             dispatch(setEmailError(''));
             dispatch(setPasswordError(''));
             navigate('/');
           })
           .catch((error) => {
             errorCheck(error);
+            dispatch(authenticationFetchingError());
           });
       })
       .catch((error) => {

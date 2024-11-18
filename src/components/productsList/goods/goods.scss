@@ -38,11 +38,11 @@
   &__item-cross {
     padding: 5px;
     position: absolute;
-    top: 10px;
-    right: 10px;
-    color: #b3b3b6;
-    height: 35px;
-    width: 35px;
+    top: 6px;
+    right: 6px;
+    color: #dbdbdb;
+    height: 30px;
+    width: 30px;
 
     cursor: pointer;
     z-index: 11;
@@ -80,7 +80,7 @@
     height: 100%;
   }
   &__svg-cont {
-    width: 60px;
+    width: 80px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;

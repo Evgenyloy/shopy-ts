@@ -14,8 +14,10 @@ import Checkout from '../checkout/Checkout';
 import Favorites from '../favorites/Favorites';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../registerPage/RegisterPage';
+import About from '../about/About';
 
 function App() {
+  console.log('app');
   const { orders, favorites, user, isAuth } = useAuth();
   const updateUserInformation = async (user: any) => {
     const db = getFirestore();
@@ -29,12 +31,9 @@ function App() {
   useEffect(() => {
     if (isAuth) {
       updateUserInformation(user);
-      console.log('updateUserInformation');
+      console.log('updateUserAppInformation');
     }
-    /*  if (!isAuth) {
-      console.log('!isAuth');
-      return;
-    } */
+    console.log('createUpdateLocalStorage');
     localStorage.setItem(
       'userData',
       JSON.stringify({ orders, favorites, email: '', uid: '' })
@@ -55,6 +54,7 @@ function App() {
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
+            <Route path="/about" element={<About />} />
           </Route>
         </Routes>
         <Footer />

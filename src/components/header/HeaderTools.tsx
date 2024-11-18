@@ -20,15 +20,18 @@ interface IHeaderToolsProps {
 
 const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
   const dispatch = useDispatch();
-  const spinnerLoading = useAppSelector(
-    (store) => store.spinners.spinnerVisibility
+  const databaseLoading = useAppSelector(
+    (store) => store.login.loadingDatabaseStatus
   );
   const { user, orders, favorites, isAuth } = useAuth();
 
   const logOut = async () => {
+    console.log('logOut start');
+
     const auth = getAuth();
     await signOut(auth)
       .then(() => {
+        console.log('logOut end');
         dispatch(removeUser());
         dispatch(setOrders([]));
         dispatch(setFavoriteItems([]));
@@ -52,8 +55,12 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
       >
         <PiShoppingCartSimpleBold />
         <span className=" header-tools__item-span">
-          {spinnerLoading && <Spinner isLoading className="spinner-header" />}
-          {!spinnerLoading && orders.length > 0 && orders.length}
+          {databaseLoading === 'loading' && (
+            <Spinner className={'spinner-header'} />
+          )}
+          {databaseLoading === 'idle' && orders.length > 0
+            ? orders.length
+            : null}
         </span>
       </NavLink>
       <NavLink
@@ -66,8 +73,12 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
       >
         <AiFillHeart />
         <span className=" header-tools__items">
-          {spinnerLoading && <Spinner isLoading className="spinner-header" />}
-          {!spinnerLoading && favorites?.length > 0 && favorites?.length}
+          {databaseLoading === 'loading' && (
+            <Spinner className={'spinner-header'} />
+          )}
+          {databaseLoading === 'idle' && favorites.length > 0
+            ? favorites.length
+            : null}
         </span>
       </NavLink>
       {isAuth ? (

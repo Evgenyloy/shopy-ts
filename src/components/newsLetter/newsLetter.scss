@@ -38,11 +38,12 @@
 
   &__input {
     font-family: 'Harmonia Sans Pro Cyr';
-    border: 1px solid #8d959c;
-    border-radius: 5px;
+    border: none;
+    border-bottom: 1px solid #8d959c;
+    padding-left: 15px;
     font-size: 14px;
     opacity: 0.8;
-    text-align: center;
+    text-align: left;
     margin: 0 5px;
   }
 

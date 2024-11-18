@@ -3,7 +3,6 @@ import App from './components/app/App';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import './style/style.scss';
 
 const root = ReactDOM.createRoot(

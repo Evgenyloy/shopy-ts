@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../../hooks/hooks';
 import Pagination from './Pagination';
 import GoodsItem from './GoodsItem';
@@ -6,14 +6,16 @@ import Spinner from '../../spinner/Spinner';
 
 import { useGetProductsQuery } from '../../../api/apiSlice';
 import { IProduct } from '../../../types/types';
+
 import './goods.scss';
 
 function Goods() {
   const {
     data: products = [],
     isError,
-    isLoading,
+
     isSuccess,
+    isFetching,
   } = useGetProductsQuery();
 
   const { categories } = useAppSelector((state) => state.category);
@@ -93,20 +95,8 @@ function Goods() {
 
   return (
     <div className="goods">
-      {isLoading && <Spinner isLoading={isLoading} />}
-      {isError && (
-        <div
-          style={{
-            textAlign: 'center',
-            color: '#34404b',
-            fontSize: '22px',
-            margin: '0 auto',
-            paddingTop: '150px',
-          }}
-        >
-          oops something went wrong please reload the page
-        </div>
-      )}
+      {isFetching && <Spinner />}
+      {isError && <ErrorMessage />}
       {items.length === 0 && isSuccess ? <Stub /> : items}
 
       <Pagination
@@ -126,4 +116,19 @@ const Stub = () => {
   );
 };
 
+const ErrorMessage = () => {
+  return (
+    <div
+      style={{
+        textAlign: 'center',
+        color: '#34404b',
+        fontSize: '22px',
+        margin: '0 auto',
+        paddingTop: '220px',
+      }}
+    >
+      oops something went wrong please reload the page
+    </div>
+  );
+};
 export default Goods;

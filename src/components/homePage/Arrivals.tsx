@@ -6,7 +6,7 @@ import './arrivals.scss';
 function Arrivals() {
   const {
     data: products = [],
-    isLoading,
+    isFetching,
     isError,
     isSuccess,
   } = useGetProductsQuery();
@@ -41,21 +41,12 @@ function Arrivals() {
         </h3>
       </div>
       <div className="arrivals__card-inner">
-        {isLoading && <Spinner isLoading={isLoading} />}
-        {isError ||
-          (products === null && (
-            <div
-              style={{
-                textAlign: 'center',
-                color: '#34404b',
-                fontSize: '22px',
-                margin: '0 auto',
-                paddingTop: '150px',
-              }}
-            >
-              oops something went wrong please reload the page
-            </div>
-          ))}
+        {isFetching && <Spinner />}
+        {isError && (
+          <div className="arrivals__card-error">
+            oops something went wrong please reload the page
+          </div>
+        )}
         {isSuccess && renderItem}
       </div>
       <div className="arrivals__btn-cont">

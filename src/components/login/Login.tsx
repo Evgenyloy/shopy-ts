@@ -14,8 +14,15 @@ import {
   browserLocalPersistence,
 } from 'firebase/auth';
 import { setUser, setOrders, setFavoriteItems } from '../../slices/userSlice';
-import { setEmailError, setPasswordError } from '../../slices/errorSlice';
-import { spinnerChanged } from '../../slices/spinnersSlice';
+import { setEmailError, setPasswordError } from '../../slices/errorFormSlice';
+import {
+  authenticationFetched,
+  authenticationFetching,
+  authenticationFetchingError,
+  databaseFetched,
+  databaseFetching,
+  databaseFetchingError,
+} from '../../slices/loginSlice';
 import Form from '../form/Form';
 import { useAuth } from '../../hooks/hooks';
 import { IOrder, IFirebaseUserData, IProduct } from '../../types/types';
@@ -24,7 +31,7 @@ function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const errorCheck = (error: Error) => {
+  const errorsCheck = (error: Error) => {
     if (error.message === 'Firebase: Error (auth/invalid-email).') {
       dispatch(setEmailError('wrong-email'));
       dispatch(setPasswordError(''));
@@ -50,9 +57,10 @@ function Login() {
   const { orders, favorites, user: user2, isAuth } = useAuth();
 
   const handleLogin = (email: string, password: string) => {
-    dispatch(spinnerChanged(true));
+    dispatch(authenticationFetching());
+    dispatch(databaseFetching());
     const auth = getAuth();
-    navigate(-1);
+
     setPersistence(auth, browserLocalPersistence)
       .then(async () => {
         return await signInWithEmailAndPassword(auth, email, password)
@@ -61,19 +69,23 @@ function Login() {
 
             dispatch(setUser({ uid: user.uid, email: user.email }));
             //объединяем данные в firebase -----------------------------------------
-            updateUserInformation(email);
+            updateUserInformation(email)
+              .then((data) => dispatch(databaseFetched()))
+              .catch((error: Error) => dispatch(databaseFetchingError()));
             //--получение данных из базы при входе ---------------------------------
             const data = getOrders(email);
             //----------------------------------------------------------------------
             data.then((data) => {
-              dispatch(spinnerChanged(false));
+              dispatch(authenticationFetched());
+
               const orders = data?.orders;
               const favorites = data?.favorites;
               dispatch(setOrders(data?.orders as IOrder[]));
               dispatch(setFavoriteItems(data?.favorites as IProduct[]));
-              console.log('запись в локал сторач', orders, favorites);
+              localStorage.removeItem('userData');
+              navigate(-1);
 
-              localStorage.setItem(
+              /* localStorage.setItem(
                 'userData',
                 JSON.stringify({
                   orders,
@@ -81,16 +93,18 @@ function Login() {
                   email: user.email,
                   uid: user.uid,
                 })
-              );
+              ); */
               dispatch(setEmailError(''));
               dispatch(setPasswordError(''));
             });
           })
           .catch((error: Error) => {
-            errorCheck(error);
+            errorsCheck(error);
           });
       })
-      .catch((error) => {});
+      .catch((error) => {
+        dispatch(authenticationFetchingError());
+      });
   };
 
   //--получение данных из базы при входе ---------------------------------

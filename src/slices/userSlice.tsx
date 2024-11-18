@@ -6,7 +6,6 @@ const firebaseUserData = JSON.parse(
     'firebase:authUser:AIzaSyAWEVRT308MOF8Lo9_aRbLEdHbgLHcf65E:[DEFAULT]'
   ) as string
 );
-
 const userData = JSON.parse(localStorage.getItem('userData') as string);
 
 interface IInitialState {
@@ -18,12 +17,12 @@ interface IInitialState {
 const initialState: IInitialState = {
   user: firebaseUserData
     ? { email: firebaseUserData.email, uid: firebaseUserData.uid }
-    : userData
-    ? { email: '', uid: '' }
-    : null,
+    : { email: '', uid: '' },
   favorites: userData ? userData.favorites : [],
   orders: userData ? userData.orders : [],
 };
+
+console.log('userSlice');
 
 const userSlice = createSlice({
   name: 'user',
@@ -76,7 +75,6 @@ const userSlice = createSlice({
     },
   },
 });
-console.log('userSlice');
 
 export const {
   setUser,
@@ -92,11 +90,7 @@ export const {
 } = userSlice.actions;
 export default userSlice.reducer;
 
-//изначально пользователь анонимный
-//все что он добавляет в избранное должно где-то сохранятся (что-бы это не слетело при перезагрузке)
-//сохраняется это в local storage
-//при логине или регистрации избранное добавляется к firebase затем отчищается
-
-//мини спиннеры баг
-//спиннеры на логин
-//вынести updateUserInformation в карточку товаров
+//медиа запросы для оформления покупок
+//проверить все медиа запросы
+//добавить фото к оформлению заказа и кнопки количества
+//сделать унифицированные функции которые повторяются

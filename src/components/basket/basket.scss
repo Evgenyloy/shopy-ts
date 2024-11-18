@@ -157,6 +157,11 @@
   &__delete-btn {
     justify-self: center;
     cursor: pointer;
+    transition: all 0.1s linear;
+    &:hover {
+      transition: all 0.1s linear;
+      transform: scale(1.2);
+    }
     svg {
       font-size: 22px;
       color: #34404b;

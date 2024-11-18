@@ -86,9 +86,18 @@
   }
   &__order-item {
     display: grid;
-    grid-template-columns: 1fr 70px 70px;
+    grid-template-columns: 1fr 70px 70px 16px;
     gap: 10px;
     margin-bottom: 15px;
+  }
+  &__bin {
+    cursor: pointer;
+    transition: all 0.1s linear;
+    &:hover {
+      transition: all 0.1s linear;
+      transform: scale(1.2);
+      color: #ff5912;
+    }
   }
   &__description {
     font-family: 'Harmonia Sans Pro Cyr';
@@ -128,6 +137,30 @@
     left: 0;
     font-size: 11px;
     color: #ff3300;
+  }
+  &__title-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__back {
+    cursor: pointer;
+    display: flex;
+    &:hover .product__back-text,
+    &:hover .product__back-svg {
+      color: #ff5912;
+    }
+    &-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: #b2b3b4;
+      transition: 0.1s linear;
+      margin-right: 5px;
+    }
+    &-svg {
+      color: #b2b3b4;
+      font-size: 14px;
+      transition: 0.1s linear;
+    }
   }
 }
 

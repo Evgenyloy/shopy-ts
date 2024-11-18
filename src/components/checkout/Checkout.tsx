@@ -2,13 +2,15 @@ import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
 import { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import { deleteOrders } from '../../slices/userSlice';
-import { Link } from 'react-router-dom';
+import { deleteOrders, removeOrder } from '../../slices/userSlice';
 import CheckoutPopup from './CheckoutPopup';
-
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { MdArrowBackIos } from 'react-icons/md';
+import { useNavigate, Link } from 'react-router-dom';
 import './checkout.scss';
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     if (e.target.parentNode === null) return;
     (e.target.parentNode as Element).classList.add('active');
@@ -87,6 +89,12 @@ const Checkout = () => {
         <p className="checkout__price">
           {(order.price * order.quantity).toFixed(2) + '$'}
         </p>
+        <p
+          className="checkout__bin"
+          onClick={() => dispatch(removeOrder(order.id))}
+        >
+          <RiDeleteBinLine />
+        </p>
       </div>
     );
   });
@@ -95,7 +103,13 @@ const Checkout = () => {
     <div className="checkout">
       <div className="container">
         <div className="checkout__inner">
-          <h2 className="checkout__title">Buyer details</h2>
+          <div className="checkout__title-wrapper">
+            <h2 className="checkout__title">Buyer details</h2>
+            <div className="checkout__back" onClick={() => navigate(-1)}>
+              <MdArrowBackIos className="product__back-svg" />
+              <p className="product__back-text">back</p>
+            </div>
+          </div>
           <Formik
             initialValues={{ name: '', email: '', phone: '' }}
             onSubmit={(values) => handleButtonClick()}

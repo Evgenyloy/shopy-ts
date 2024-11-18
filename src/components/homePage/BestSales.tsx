@@ -8,7 +8,7 @@ import { useGetProductsQuery } from '../../api/apiSlice';
 const BestSales = () => {
   const {
     data: products = [],
-    isLoading,
+    isFetching,
     isError,
     isSuccess,
   } = useGetProductsQuery();
@@ -57,21 +57,12 @@ const BestSales = () => {
         </h3>
       </div>
       <div className="best-sales__items-inner">
-        {isLoading && <Spinner isLoading={isLoading} />}
-        {isError ||
-          (products === null && (
-            <div
-              style={{
-                textAlign: 'center',
-                color: '#34404b',
-                fontSize: '22px',
-                margin: '0 auto',
-                paddingTop: '150px',
-              }}
-            >
-              oops something went wrong please reload the page
-            </div>
-          ))}
+        {isFetching && <Spinner />}
+        {isError && (
+          <div className="best-sales__card-error">
+            oops something went wrong please reload the page
+          </div>
+        )}
         {isSuccess && renderItems.slice(0, 3)}
       </div>
     </div>

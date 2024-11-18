@@ -6,8 +6,14 @@ function PriceFilterRadio() {
   const dispatch = useAppDispatch();
   const value = useAppSelector((state) => state?.radioFilter?.radioFilter);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(radioFilterChanged(e.target.id));
+  const handleChange = (e: React.MouseEvent<HTMLInputElement>) => {
+    if (!(e.target instanceof HTMLElement)) return;
+
+    if (value === e.target.id) {
+      dispatch(radioFilterChanged(''));
+    } else {
+      dispatch(radioFilterChanged(e.target.id));
+    }
   };
 
   return (
@@ -18,8 +24,9 @@ function PriceFilterRadio() {
         name="filter"
         value="cheap first"
         id="cheap first"
-        onChange={handleChange}
-        checked={value == 'cheap first' ? true : false}
+        onClick={(e) => handleChange(e)}
+        checked={value === 'cheap first' ? true : false}
+        readOnly
       />
       <label className="filter-radio__label" htmlFor="cheap first">
         cheap first
@@ -31,8 +38,9 @@ function PriceFilterRadio() {
         name="filter"
         value="expensive first"
         id="expensive first"
-        onChange={handleChange}
-        checked={value == 'expensive first' ? true : false}
+        onClick={(e) => handleChange(e)}
+        checked={value === 'expensive first' ? true : false}
+        readOnly
       />
       <label className="filter-radio__label" htmlFor="expensive first">
         expensive first
@@ -44,8 +52,9 @@ function PriceFilterRadio() {
         name="filter"
         value="popular"
         id="popular"
-        onChange={handleChange}
-        checked={value == 'popular' ? true : false}
+        onClick={(e) => handleChange(e)}
+        checked={value === 'popular' ? true : false}
+        readOnly
       />
       <label className="filter-radio__label" htmlFor="popular">
         popular
@@ -57,8 +66,9 @@ function PriceFilterRadio() {
         name="filter"
         value="high rating"
         id="high rating"
-        onChange={handleChange}
-        checked={value == 'high rating' ? true : false}
+        onClick={(e) => handleChange(e)}
+        checked={value === 'high rating' ? true : false}
+        readOnly
       />
       <label className="filter-radio__label" htmlFor="high rating">
         high rating

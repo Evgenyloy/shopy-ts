@@ -103,6 +103,18 @@
       background-color: #ff3300;
     }
   }
+  &__card-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    text-align: center;
+    color: #34404b;
+    font-size: 22px;
+    width: 100%;
+
+    padding-top: 150px;
+  }
 }
 
 @media (max-width: 350px) {

@@ -1,19 +1,18 @@
+import { useAppSelector } from '../../hooks/hooks';
+
 import './spinner.scss';
 
 const Spinner = (props: any) => {
   const { isLoading, width, height, className } = props;
-  let spinnerClassName = isLoading ? 'spinner' : 'spinner hidden';
-
+  const clazz = className ? 'spinner-header' : 'spinner';
   return (
-    <div className={className ? className : spinnerClassName}>
+    <div className={clazz}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         //xlink="http://www.w3.org/1999/xlink"
         style={{
           background: 'transparent',
           shapeRendering: 'auto',
-          width: width,
-          height: height,
         }}
         /* width={'150px'}
         height={'150px'} */
