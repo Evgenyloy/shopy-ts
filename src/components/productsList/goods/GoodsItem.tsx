@@ -1,23 +1,19 @@
-import { useDispatch } from 'react-redux';
+import { useAppDispatch } from '../../../hooks/hooks';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { PiShoppingCartSimpleBold } from 'react-icons/pi';
 import { RxCross1 } from 'react-icons/rx';
-import { FaMoneyCheckDollar } from 'react-icons/fa6';
-import { GiMoneyStack } from 'react-icons/gi';
 import { BsCurrencyDollar } from 'react-icons/bs';
 import { useAuth } from '../../../hooks/hooks';
-import { addFavoriteItem, removeFavoriteItem } from '../../../slices/userSlice';
-import {
-  removeOrder,
-  addOrder,
-  changeQuantity,
-} from '../../../slices/userSlice';
 import { Rating } from 'react-simple-star-rating';
-import { checkAvailability } from '../../../utils/utils';
 import { FC } from 'react';
-import { IOrder, IProduct } from '../../../types/types';
+import { IProduct } from '../../../types/types';
 import { useState } from 'react';
+import {
+  handleFavoriteClick,
+  handleBasketClick,
+  handleOrderClick,
+} from '../../../utils/utils';
 
 interface IGoodsItemProps {
   item: IProduct;
@@ -25,29 +21,10 @@ interface IGoodsItemProps {
 }
 
 const GoodsItem: FC<IGoodsItemProps> = ({ item, cross }) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { favorites, orders } = useAuth();
-
-  const orderItem = orders.filter((order) => order.id === item?.id);
-  let [value, setValue] = useState(orderItem[0] ? orderItem[0]?.quantity : 1);
-  const handleOrderClick = (orders: IOrder[], product: IProduct) => {
-    return (
-      checkAvailability(orders, product) ? null : dispatch(addOrder(product)),
-      dispatch(changeQuantity([product.id, value]))
-    );
-  };
-
-  const handleFavoriteClick = (favorites: IProduct[], item: IProduct) => {
-    return checkAvailability(favorites, item)
-      ? dispatch(removeFavoriteItem(item.id))
-      : dispatch(addFavoriteItem(item));
-  };
-
-  const handleBasketClick = (orders: IOrder[], item: IProduct) => {
-    return checkAvailability(orders, item)
-      ? dispatch(removeOrder(item.id))
-      : dispatch(addOrder(item));
-  };
+  const goodsItem = orders.filter((order) => item.id === order.id);
+  let [qty, setQty] = useState(goodsItem[0] ? goodsItem[0].quantity : 1);
 
   const clazz = favorites.some((i) => {
     return i.id == item.id;
@@ -81,23 +58,26 @@ const GoodsItem: FC<IGoodsItemProps> = ({ item, cross }) => {
         <Link
           className="goods__svg-link"
           to={{}}
-          onClick={() => handleFavoriteClick(favorites, item)}
+          onClick={() => handleFavoriteClick(favorites, item, dispatch)}
         >
           <AiOutlineHeart className={clazz} />
         </Link>
         <Link
           className="goods__svg-link"
           to={{}}
-          onClick={() => handleBasketClick(orders, item)}
+          onClick={() => handleBasketClick(orders, item, dispatch)}
         >
           <PiShoppingCartSimpleBold className={clazz2} />
         </Link>
         <Link
           className="goods__svg-link"
           to={'/checkout'}
-          onClick={() => handleOrderClick(orders, item)}
+          onClick={() => handleOrderClick(orders, item, dispatch, qty)}
         >
-          <BsCurrencyDollar className="goods__heart-svg" />
+          <BsCurrencyDollar
+            className="goods__heart-svg"
+            style={{ width: '21px', height: '21px' }}
+          />
         </Link>
       </div>
 
@@ -109,7 +89,7 @@ const GoodsItem: FC<IGoodsItemProps> = ({ item, cross }) => {
       {cross && (
         <RxCross1
           className="goods__item-cross"
-          onClick={() => handleFavoriteClick(favorites, item)}
+          onClick={() => handleFavoriteClick(favorites, item, dispatch)}
         />
       )}
     </div>

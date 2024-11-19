@@ -1,16 +1,20 @@
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import { deleteOrders, removeOrder } from '../../slices/userSlice';
+import { deleteOrders } from '../../slices/userSlice';
 import CheckoutPopup from './CheckoutPopup';
-import { RiDeleteBinLine } from 'react-icons/ri';
 import { MdArrowBackIos } from 'react-icons/md';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import CheckoutItem from './CheckoutItem';
+import { useAuth } from '../../hooks/hooks';
+import { calculationOfTheSum } from '../../utils/utils';
 import './checkout.scss';
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const { orders } = useAuth();
+
   const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
     if (e.target.parentNode === null) return;
     (e.target.parentNode as Element).classList.add('active');
@@ -63,7 +67,7 @@ const Checkout = () => {
   };
 
   const [popup, setPopup] = useState(false);
-  const orders = useAppSelector((state) => state.user.orders);
+
   const dispatch = useAppDispatch();
 
   const handleButtonClick = () => {
@@ -72,30 +76,11 @@ const Checkout = () => {
     dispatch(deleteOrders());
   };
 
-  const totalPrice = orders
-    .map((order) => {
-      return order.price * order.quantity;
-    })
-    .reduce((a, b) => a + b, 0)
-    .toFixed(2);
-
-  const renderItems = orders.map((order) => {
+  const renderItem = orders.map((order) => {
     return (
-      <div className="checkout__order-item" key={order.id}>
-        <Link className="checkout__item" to={`/product/${order.id}`}>
-          {order.title}
-        </Link>
-        <p className="checkout__quantity">{order.quantity}</p>
-        <p className="checkout__price">
-          {(order.price * order.quantity).toFixed(2) + '$'}
-        </p>
-        <p
-          className="checkout__bin"
-          onClick={() => dispatch(removeOrder(order.id))}
-        >
-          <RiDeleteBinLine />
-        </p>
-      </div>
+      <React.Fragment key={order.id}>
+        <CheckoutItem order={order} />
+      </React.Fragment>
     );
   });
 
@@ -137,9 +122,9 @@ const Checkout = () => {
               </div>
 
               <h3 className="checkout__details">purchase details</h3>
-              <div className="checkout__orders">{renderItems}</div>
+              <div className="checkout__orders">{renderItem}</div>
               <p className="checkout__total">
-                Total Price <span>{totalPrice + '$'}</span>
+                Total Price <span>{calculationOfTheSum(orders) + '$'}</span>
               </p>
               <button className="checkout__button" type="submit">
                 Valid purchase

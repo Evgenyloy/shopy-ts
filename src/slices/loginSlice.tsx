@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: {
   loginAuthenticationStatus: string;
@@ -7,7 +7,7 @@ const initialState: {
   loginAuthenticationStatus: 'idle',
   loadingDatabaseStatus: 'idle',
 };
-console.log('loginSlice');
+
 const spinnersSlice = createSlice({
   name: 'radioFilter',
   initialState,

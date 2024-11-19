@@ -50,8 +50,4 @@ const changeOfSeason = () => {
   return season;
 };
 
-//From everyday essentials to on-trend looks, we’ve got it.
-// The online fashion outlet
-//Today—and every day—we’re leading with purpose, championing
-// inclusivity and creating a sense of belonging.
 export default Intro;

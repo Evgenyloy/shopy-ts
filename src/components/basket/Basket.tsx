@@ -2,18 +2,12 @@ import { Fragment } from 'react';
 import { useAuth } from '../../hooks/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import BasketItem from './BasketItem';
+import { calculationOfTheSum } from '../../utils/utils';
 import './basket.scss';
 
 function Basket() {
   const { orders } = useAuth();
   const navigate = useNavigate();
-
-  const price = orders.map((order) => {
-    return order.quantity * order.price;
-  });
-
-  const priceSum = price.length > 0 ? price.reduce((a, b) => a + b) : 0;
-  const formatPrice = priceSum.toFixed(2);
 
   const renderItems = orders.map((order) => {
     return (
@@ -51,7 +45,9 @@ function Basket() {
         >
           <div className="basket__footer-inner">
             <p className="basket__footer-total">Total</p>
-            <p className="basket__footer-price">{formatPrice + '$'}</p>
+            <p className="basket__footer-price">
+              {calculationOfTheSum(orders) + '$'}
+            </p>
             {orders.length === 0 ? null : (
               <button
                 className="basket__footer-button"

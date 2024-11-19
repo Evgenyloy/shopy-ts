@@ -4,16 +4,24 @@ const About = () => {
   return (
     <div className="about">
       <div className="about__inner">
-        <h2>React educational project</h2>
-        <p>
+        <h2 className="about__title">React educational project</h2>
+        <p className="about__text">
           gitHub:{' '}
-          <a href="https://github.com/Evgenyloy/shopy" target="blanck">
+          <a
+            className="about__link"
+            href="https://github.com/Evgenyloy/shopy"
+            target="blanck"
+          >
             shopy
           </a>
         </p>
-        <p>
+        <p className="about__text">
           api:{' '}
-          <a href="https://fakestoreapi.com" target="blanck">
+          <a
+            className="about__link"
+            href="https://fakestoreapi.com"
+            target="blanck"
+          >
             fakestoreapi.com
           </a>
         </p>

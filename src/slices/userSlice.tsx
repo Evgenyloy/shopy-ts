@@ -22,8 +22,6 @@ const initialState: IInitialState = {
   orders: userData ? userData.orders : [],
 };
 
-console.log('userSlice');
-
 const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -90,7 +88,5 @@ export const {
 } = userSlice.actions;
 export default userSlice.reducer;
 
-//медиа запросы для оформления покупок
-//проверить все медиа запросы
-//добавить фото к оформлению заказа и кнопки количества
 //сделать унифицированные функции которые повторяются
+//баг с погрузкой количества в продукте

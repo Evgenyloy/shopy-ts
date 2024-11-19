@@ -5,6 +5,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { BsXLg } from 'react-icons/bs';
 import { changeQuantity, removeOrder } from '../../slices/userSlice';
 import { IOrder } from '../../types/types';
+import { handlePlusClick, handleMinusClick } from '../../utils/utils';
 
 interface IBasketItemProps {
   order: IOrder;
@@ -14,30 +15,6 @@ const BasketItem: FC<IBasketItemProps> = ({ order }) => {
   const dispatch = useAppDispatch();
   let [qty, setQty] = useState(order.quantity);
   const [price, setPrice] = useState(order.price);
-  const formatPrice = price.toFixed(2);
-
-  const handleClick = (
-    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    order: IOrder
-  ) => {
-    if ((e.target as HTMLElement).classList.contains('basket-item__input-up')) {
-      setQty(++qty);
-      setPrice(order.price * qty);
-      dispatch(changeQuantity([order.id, qty]));
-    }
-    if (
-      (e.target as HTMLElement).classList.contains('basket-item__input-down') &&
-      qty > 1
-    ) {
-      setQty(--qty);
-      setPrice(order.price * qty);
-      dispatch(changeQuantity([order.id, qty]));
-    }
-  };
-
-  const handleDeleteItem = (order: IOrder) => {
-    dispatch(removeOrder(order.id));
-  };
 
   return (
     <div className="basket-item">
@@ -59,19 +36,26 @@ const BasketItem: FC<IBasketItemProps> = ({ order }) => {
             value={qty}
             readOnly
           />
-          <div
-            className="basket-item__input-arrows "
-            onClick={(e) => handleClick(e, order)}
-          >
-            <MdKeyboardArrowUp className="basket-item__input-up" />
+          <div className="basket-item__input-arrows ">
+            <MdKeyboardArrowUp
+              className="basket-item__input-up"
+              onClick={() =>
+                handlePlusClick(order, qty, setQty, dispatch, setPrice)
+              }
+            />
 
-            <MdKeyboardArrowDown className="basket-item__input-down" />
+            <MdKeyboardArrowDown
+              className="basket-item__input-down"
+              onClick={() =>
+                handleMinusClick(order, qty, setQty, dispatch, setPrice)
+              }
+            />
           </div>
         </div>
-        <p className="basket-item__price">{formatPrice + '$'}</p>
+        <p className="basket-item__price">{price.toFixed(2) + '$'}</p>
         <div
           className="basket-item__delete-btn"
-          onClick={(e) => handleDeleteItem(order)}
+          onClick={() => dispatch(removeOrder(order.id))}
         >
           <BsXLg />
         </div>
