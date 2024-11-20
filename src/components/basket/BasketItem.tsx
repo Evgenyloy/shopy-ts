@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { Link } from 'react-router-dom';
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 import { BsXLg } from 'react-icons/bs';
-import { changeQuantity, removeOrder } from '../../slices/userSlice';
+import { removeOrder } from '../../slices/userSlice';
 import { IOrder } from '../../types/types';
 import { handlePlusClick, handleMinusClick } from '../../utils/utils';
 
@@ -31,6 +31,7 @@ const BasketItem: FC<IBasketItemProps> = ({ order }) => {
         <h2 className="basket-item__title">{order.title}</h2>
         <div className="basket-item__input-wrapper">
           <input
+            name="basket-name"
             className="basket-item__input"
             type="number"
             value={qty}

@@ -1,6 +1,6 @@
 import { CSSTransition } from 'react-transition-group';
 import { Link } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import { changePopUp } from '../../slices/popupSlice';
 import { useState } from 'react';
@@ -16,18 +16,18 @@ const Popup = () => {
     dispatch(changePopUp());
   };
 
-  const changeBodyScroll = () => {
+  const changeBodyScroll = useCallback(() => {
     if (popupVisible) {
       document.body.classList.add('noscroll');
     }
     if (!popupVisible) {
       document.body.classList.remove('noscroll');
     }
-  };
+  }, [popupVisible]);
 
   useEffect(() => {
     changeBodyScroll();
-  }, [popupVisible]);
+  }, [popupVisible, changeBodyScroll]);
 
   const [windowIsOpen, setWindowIsOpen] = useState(false);
 

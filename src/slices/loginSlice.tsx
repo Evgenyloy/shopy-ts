@@ -9,7 +9,7 @@ const initialState: {
 };
 
 const spinnersSlice = createSlice({
-  name: 'radioFilter',
+  name: 'login',
   initialState,
   reducers: {
     authenticationFetching: (state) => {

@@ -4,7 +4,6 @@ import { IoIosBasket } from 'react-icons/io';
 import { HiPlusSmall, HiOutlineMinusSmall } from 'react-icons/hi2';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/hooks';
-import { changeQuantity } from '../../slices/userSlice';
 import { IProduct } from '../../types/types';
 import { useAppDispatch } from '../../hooks/hooks';
 import { FC } from 'react';
@@ -14,6 +13,7 @@ import {
   handleBasketClick,
   handleOrderClick,
 } from '../../utils/utils';
+import { classSetting } from '../../utils/utils';
 import { handlePlusClick, handleMinusClick } from '../../utils/utils';
 
 interface IProductItemProps {
@@ -29,17 +29,7 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
   let [qty, setQty] = useState(orderItem[0] ? orderItem[0].quantity : 1);
   const price = qty * (product?.price as number);
 
-  const clazz = favorites.some((i) => {
-    return i.id == product?.id;
-  })
-    ? 'product__svg product__svg--red'
-    : 'product__svg';
-
-  const clazz2 = orders.some((i) => {
-    return i.id == product?.id;
-  })
-    ? 'product__svg product__svg--red'
-    : 'product__svg';
+  const ClassName = classSetting(favorites, orders, product, 'product__svg');
 
   return (
     <>
@@ -56,20 +46,21 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
         <div className="product__quantity">
           <p className="product__quantity-text">Choose Quantity</p>
           <div className="product__quantity-inner">
-            <HiPlusSmall
+            <HiOutlineMinusSmall
               className="product__quantity-svg"
-              onClick={() => handlePlusClick(product, qty, setQty, dispatch)}
+              onClick={() => handleMinusClick(product, qty, setQty, dispatch)}
             />
             <input
+              name="product-input"
               type="number"
               className="product__input"
               value={+qty}
               readOnly
               style={qty > 9 ? { width: '30px' } : { width: '20px' }}
             />
-            <HiOutlineMinusSmall
+            <HiPlusSmall
               className="product__quantity-svg"
-              onClick={() => handleMinusClick(product, qty, setQty, dispatch)}
+              onClick={() => handlePlusClick(product, qty, setQty, dispatch)}
             />
           </div>
         </div>
@@ -77,12 +68,12 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
           <p className="product__price">{price.toFixed(2) + ' $'}</p>
           <div className="product__order-wrapper">
             <IoIosBasket
-              className={clazz2}
+              className={ClassName.orderClass}
               onClick={() => handleBasketClick(orders, product, dispatch, qty)}
             />
 
             <AiOutlineHeart
-              className={clazz}
+              className={ClassName.favoriteClass}
               onClick={() => handleFavoriteClick(favorites, product, dispatch)}
             />
             <Link

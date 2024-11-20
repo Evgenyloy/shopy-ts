@@ -6,3 +6,10 @@
   max-width: 1180px;
   margin: 0 auto;
 }
+
+.svg--red {
+  color: #ff5912;
+  &:hover {
+    color: #ff5912;
+  }
+}

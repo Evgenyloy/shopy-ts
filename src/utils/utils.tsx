@@ -92,3 +92,22 @@ export function calculationOfTheSum(orders: any) {
     .reduce((a: any, b: any) => a + b, 0)
     .toFixed(2);
 }
+
+export function classSetting(
+  favorites: IProduct[],
+  orders: IOrder[],
+  item: IProduct,
+  className: string
+) {
+  let favoriteClass;
+  favorites.some((favorite) => favorite.id === item?.id)
+    ? (favoriteClass = className + ' svg--red')
+    : (favoriteClass = className);
+
+  let orderClass;
+  orders.some((order) => order.id === item?.id)
+    ? (orderClass = className + ' svg--red')
+    : (orderClass = className);
+
+  return { favoriteClass, orderClass };
+}

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { IOrder } from '../../types/types';
 import { useState } from 'react';
-import { changeQuantity, removeOrder } from '../../slices/userSlice';
+import { removeOrder } from '../../slices/userSlice';
 import { useAppDispatch } from '../../hooks/hooks';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';

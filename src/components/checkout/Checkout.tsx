@@ -1,6 +1,6 @@
-import { useAppSelector, useAppDispatch } from '../../hooks/hooks';
+import { useAppDispatch } from '../../hooks/hooks';
 import React, { useState } from 'react';
-import { Formik, Form, useField } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup';
 import { deleteOrders } from '../../slices/userSlice';
 import CheckoutPopup from './CheckoutPopup';
@@ -9,66 +9,14 @@ import { useNavigate } from 'react-router-dom';
 import CheckoutItem from './CheckoutItem';
 import { useAuth } from '../../hooks/hooks';
 import { calculationOfTheSum } from '../../utils/utils';
+import CustomInput from './CustomCheckoutInput';
 import './checkout.scss';
 
 const Checkout = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { orders } = useAuth();
-
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    if (e.target.parentNode === null) return;
-    (e.target.parentNode as Element).classList.add('active');
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    if (e.target.value) return;
-    if (e.target.parentNode === null) return;
-    (e.target.parentNode as Element).classList.remove('active');
-  };
-
-  const CustomInput = ({
-    label,
-    ...props
-  }: {
-    name: string;
-    label: string;
-    type: string;
-  }) => {
-    const [field, meta] = useField(props);
-
-    return (
-      <>
-        <input
-          {...props}
-          {...field}
-          className={
-            meta.touched && meta.error
-              ? 'checkout__input input-error'
-              : 'checkout__input'
-          }
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        />
-        {meta.touched && meta.error ? (
-          <div
-            data-name="name"
-            data-component="div"
-            className="checkout__input-error"
-          >
-            {meta.error}
-          </div>
-        ) : null}
-
-        <label className="checkout__name-label" htmlFor={label}>
-          {label}
-        </label>
-      </>
-    );
-  };
-
   const [popup, setPopup] = useState(false);
-
-  const dispatch = useAppDispatch();
 
   const handleButtonClick = () => {
     if (orders.length === 0) return;
@@ -76,7 +24,7 @@ const Checkout = () => {
     dispatch(deleteOrders());
   };
 
-  const renderItem = orders.map((order) => {
+  const renderItems = orders.map((order) => {
     return (
       <React.Fragment key={order.id}>
         <CheckoutItem order={order} />
@@ -122,7 +70,7 @@ const Checkout = () => {
               </div>
 
               <h3 className="checkout__details">purchase details</h3>
-              <div className="checkout__orders">{renderItem}</div>
+              <div className="checkout__orders">{renderItems}</div>
               <p className="checkout__total">
                 Total Price <span>{calculationOfTheSum(orders) + '$'}</span>
               </p>

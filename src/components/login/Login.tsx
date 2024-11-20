@@ -25,36 +25,14 @@ import {
 } from '../../slices/loginSlice';
 import Form from '../form/Form';
 import { useAuth } from '../../hooks/hooks';
-import { IOrder, IFirebaseUserData, IProduct } from '../../types/types';
+import { IOrder, IProduct } from '../../types/types';
+import { errorsCheck } from './loginUtils';
 
 function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const errorsCheck = (error: Error) => {
-    if (error.message === 'Firebase: Error (auth/invalid-email).') {
-      dispatch(setEmailError('wrong-email'));
-      dispatch(setPasswordError(''));
-    }
-    if (error.message === 'Firebase: Error (auth/user-not-found).') {
-      dispatch(setEmailError('user-not-found'));
-      dispatch(setPasswordError(''));
-    }
-    if (error.message === 'Firebase: Error (auth/wrong-password).') {
-      dispatch(setPasswordError('wrong-password'));
-      dispatch(setEmailError(''));
-    }
-    if (error.message === 'Firebase: Error (auth/missing-password).') {
-      dispatch(setPasswordError('missing-password'));
-      dispatch(setEmailError(''));
-    }
-    if (error.message.includes('(auth/too-many-requests)')) {
-      dispatch(setPasswordError('account disabled due to many failed login'));
-      dispatch(setEmailError(''));
-    }
-  };
-
-  const { orders, favorites, user: user2, isAuth } = useAuth();
+  const { orders, favorites } = useAuth();
 
   const handleLogin = (email: string, password: string) => {
     dispatch(authenticationFetching());
@@ -65,66 +43,34 @@ function Login() {
       .then(async () => {
         return await signInWithEmailAndPassword(auth, email, password)
           .then(({ user }) => {
-            //--после входа сохраняем пользователя в redux
-
             dispatch(setUser({ uid: user.uid, email: user.email }));
-            //объединяем данные в firebase -----------------------------------------
+
             updateUserInformation(email)
               .then((data) => dispatch(databaseFetched()))
               .catch((error: Error) => dispatch(databaseFetchingError()));
-            //--получение данных из базы при входе ---------------------------------
+
             const data = getOrders(email);
-            //----------------------------------------------------------------------
             data.then((data) => {
               dispatch(authenticationFetched());
 
-              const orders = data?.orders;
-              const favorites = data?.favorites;
               dispatch(setOrders(data?.orders as IOrder[]));
               dispatch(setFavoriteItems(data?.favorites as IProduct[]));
               localStorage.removeItem('userData');
               navigate(-1);
-
-              /* localStorage.setItem(
-                'userData',
-                JSON.stringify({
-                  orders,
-                  favorites,
-                  email: user.email,
-                  uid: user.uid,
-                })
-              ); */
-              dispatch(setEmailError(''));
-              dispatch(setPasswordError(''));
             });
           })
           .catch((error: Error) => {
-            errorsCheck(error);
+            errorsCheck(error, dispatch);
+            dispatch(authenticationFetchingError());
+            dispatch(databaseFetchingError());
           });
       })
-      .catch((error) => {
-        dispatch(authenticationFetchingError());
-      });
+      .catch((error) => {});
+    dispatch(setEmailError(''));
+    dispatch(setPasswordError(''));
   };
-
-  //--получение данных из базы при входе ---------------------------------
-  const getOrders = async (email: string) => {
-    const db = getFirestore();
-    const docRef = doc(db, 'users', `${email}`);
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      console.log('получение данных', docSnap.data());
-      return docSnap.data();
-    } else {
-      // docSnap.data() will be undefined in this case
-      alert('No such document!');
-    }
-  };
-  //----------------------------------------------------------------------
 
   const updateUserInformation = async (email: string) => {
-    console.log('объединение данных');
     const db = getFirestore();
     const userRef = doc(db, 'users', `${email}`);
 
@@ -133,6 +79,21 @@ function Login() {
       favorites: arrayUnion(...favorites),
     });
   };
+
+  const getOrders = async (email: string) => {
+    const db = getFirestore();
+    const docRef = doc(db, 'users', `${email}`);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      //console.log('получение данных', docSnap.data());
+      return docSnap.data();
+    } else {
+      // docSnap.data() will be undefined in this case
+      alert('No such document!');
+    }
+  };
+
   return <Form title="sign in" handleClick={handleLogin} />;
 }
 

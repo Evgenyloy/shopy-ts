@@ -20,7 +20,18 @@ function LoginPage() {
   return (
     <div className="login-page">
       {loginAuthentication === 'loading' && <Spinner />}
-      {loginAuthentication === 'error' && <div>error</div>}
+      {loginAuthentication === 'error' && (
+        <div className="login-page__inner">
+          <h1 className="login-page__title">Login</h1>
+          <Login />
+          <p className="login-page__paragraph">
+            Or{' '}
+            <Link to="/register" onClick={handleClick}>
+              register
+            </Link>
+          </p>
+        </div>
+      )}
       {loginAuthentication === 'idle' && (
         <div className="login-page__inner">
           <h1 className="login-page__title">Login</h1>

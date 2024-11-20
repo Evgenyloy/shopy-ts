@@ -4,20 +4,21 @@ import { FC } from 'react';
 import './pagination.scss';
 
 interface IPaginationProps {
-  productsPerPage: number;
   totalProducts: number;
   items: JSX.Element[];
+  productsPerPage: number;
 }
 
 const Pagination: FC<IPaginationProps> = ({
-  productsPerPage,
   totalProducts,
   items,
+  productsPerPage,
 }): JSX.Element | null => {
-  const pageNumber = [];
   const dispatch = useAppDispatch();
+
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
 
+  const pageNumber = [];
   for (let i = 1; i <= Math.ceil(totalProducts / productsPerPage); i++) {
     pageNumber.push(i);
   }

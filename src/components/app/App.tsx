@@ -2,7 +2,6 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
 import { doc, getFirestore, updateDoc } from 'firebase/firestore';
 import { useAuth } from '../../hooks/hooks';
-
 import Header from '../header/Header';
 import HomePage from '../homePage/HomePage';
 import MainLayout from '../mainLayout/MainLayout';
@@ -18,7 +17,9 @@ import About from '../about/About';
 
 function App() {
   const { orders, favorites, user, isAuth } = useAuth();
+
   const updateUserInformation = async (user: any) => {
+    if (!user) return;
     const db = getFirestore();
     const userRef = doc(db, 'users', `${user.email}`);
     await updateDoc(userRef, {

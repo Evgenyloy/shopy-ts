@@ -4,19 +4,9 @@ import Spinner from '../spinner/Spinner';
 
 import './bestSales.scss';
 import { useGetProductsQuery } from '../../api/apiSlice';
+import { IProduct } from '../../types/types';
 
-const BestSales = () => {
-  const {
-    data: products = [],
-    isFetching,
-    isError,
-    isSuccess,
-  } = useGetProductsQuery();
-
-  const handleItemClick = () => {
-    window.scrollTo(0, 0);
-  };
-
+function renderItemView(products: IProduct[]) {
   const renderItems = products.map((item) => {
     return (
       <div className={'best-sales__item'} key={item.id}>
@@ -39,12 +29,24 @@ const BestSales = () => {
         <Link
           className="best-sales__link"
           to={`/product/${item.id}`}
-          onClick={handleItemClick}
+          onClick={() => window.scrollTo(0, 0)}
         ></Link>
       </div>
     );
   });
 
+  return renderItems;
+}
+
+function BestSales() {
+  const {
+    data: products = [],
+    isFetching,
+    isError,
+    isSuccess,
+  } = useGetProductsQuery();
+
+  const renderItems = renderItemView(products);
   return (
     <div className="best-sales">
       <div className="best-sales__text-block">
@@ -67,6 +69,6 @@ const BestSales = () => {
       </div>
     </div>
   );
-};
+}
 
 export default BestSales;

@@ -14,6 +14,7 @@ import {
   handleBasketClick,
   handleOrderClick,
 } from '../../../utils/utils';
+import { classSetting } from '../../../utils/utils';
 
 interface IGoodsItemProps {
   item: IProduct;
@@ -21,22 +22,12 @@ interface IGoodsItemProps {
 }
 
 const GoodsItem: FC<IGoodsItemProps> = ({ item, cross }) => {
-  const dispatch = useAppDispatch();
   const { favorites, orders } = useAuth();
+  const dispatch = useAppDispatch();
   const goodsItem = orders.filter((order) => item.id === order.id);
-  let [qty, setQty] = useState(goodsItem[0] ? goodsItem[0].quantity : 1);
+  let [qty] = useState(goodsItem[0] ? goodsItem[0].quantity : 1);
 
-  const clazz = favorites.some((i) => {
-    return i.id == item.id;
-  })
-    ? 'goods__heart-svg goods__heart-svg--red'
-    : 'goods__heart-svg';
-
-  const clazz2 = orders.some((i) => {
-    return i.id == item.id;
-  })
-    ? 'goods__heart-svg goods__heart-svg--red'
-    : 'goods__heart-svg';
+  const ClassName = classSetting(favorites, orders, item, 'goods__heart-svg');
 
   return (
     <div className="goods__item " key={item.id}>
@@ -60,14 +51,14 @@ const GoodsItem: FC<IGoodsItemProps> = ({ item, cross }) => {
           to={{}}
           onClick={() => handleFavoriteClick(favorites, item, dispatch)}
         >
-          <AiOutlineHeart className={clazz} />
+          <AiOutlineHeart className={ClassName.favoriteClass} />
         </Link>
         <Link
           className="goods__svg-link"
           to={{}}
           onClick={() => handleBasketClick(orders, item, dispatch)}
         >
-          <PiShoppingCartSimpleBold className={clazz2} />
+          <PiShoppingCartSimpleBold className={ClassName.orderClass} />
         </Link>
         <Link
           className="goods__svg-link"

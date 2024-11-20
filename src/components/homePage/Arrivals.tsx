@@ -2,17 +2,9 @@ import { Link } from 'react-router-dom';
 import { useGetProductsQuery } from '../../api/apiSlice';
 import Spinner from '../spinner/Spinner';
 import './arrivals.scss';
+import { IProduct } from '../../types/types';
 
-function Arrivals() {
-  const {
-    data: products = [],
-    isFetching,
-    isError,
-    isSuccess,
-  } = useGetProductsQuery();
-
-  const item = products.slice(15, 19);
-
+function renderItemView(item: IProduct[]) {
   const renderItem = item.map((item) => {
     return (
       <div className="arrivals__item" key={item.id}>
@@ -29,6 +21,18 @@ function Arrivals() {
       </div>
     );
   });
+  return renderItem;
+}
+
+function Arrivals() {
+  const {
+    data: products = [],
+    isFetching,
+    isError,
+    isSuccess,
+  } = useGetProductsQuery();
+  const item = products.slice(15, 19);
+  const renderItem = renderItemView(item);
 
   return (
     <div className="arrivals">

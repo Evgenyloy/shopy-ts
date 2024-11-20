@@ -10,7 +10,7 @@ const About = () => {
           <a
             className="about__link"
             href="https://github.com/Evgenyloy/shopy"
-            target="blanck"
+            target="blanc"
           >
             shopy
           </a>
@@ -20,7 +20,7 @@ const About = () => {
           <a
             className="about__link"
             href="https://fakestoreapi.com"
-            target="blanck"
+            target="blanc"
           >
             fakestoreapi.com
           </a>

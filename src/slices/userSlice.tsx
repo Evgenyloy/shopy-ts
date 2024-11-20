@@ -55,9 +55,10 @@ const userSlice = createSlice({
     },
     changeQuantity: (state, action: PayloadAction<number[]>) => {
       state.orders.map((order: any) => {
-        if (order.id == action.payload[0]) {
+        if (order.id === action.payload[0]) {
           return (order.quantity = action.payload[1]);
         }
+        return false;
       });
     },
     setFavoriteItems: (state, action: PayloadAction<IProduct[]>) => {
@@ -87,6 +88,3 @@ export const {
   setOrders,
 } = userSlice.actions;
 export default userSlice.reducer;
-
-//сделать унифицированные функции которые повторяются
-//баг с погрузкой количества в продукте

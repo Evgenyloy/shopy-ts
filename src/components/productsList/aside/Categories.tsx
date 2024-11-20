@@ -11,7 +11,7 @@ function Categories() {
 
   useEffect(() => {
     document.querySelectorAll('.categories__item').forEach((item) => {
-      if (item.id == category) {
+      if (item.id === category) {
         item.className = 'categories__item active';
       } else {
         item.className = 'categories__item';
