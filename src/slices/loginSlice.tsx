@@ -1,11 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState: {
   loginAuthenticationStatus: string;
   loadingDatabaseStatus: string;
+  logout: boolean;
 } = {
   loginAuthenticationStatus: 'idle',
   loadingDatabaseStatus: 'idle',
+  logout: false,
 };
 
 const spinnersSlice = createSlice({
@@ -30,6 +32,9 @@ const spinnersSlice = createSlice({
     databaseFetchingError: (state) => {
       state.loadingDatabaseStatus = 'error';
     },
+    setLogoutSpinner: (state, action: PayloadAction<boolean>) => {
+      state.logout = action.payload;
+    },
   },
 });
 
@@ -43,4 +48,5 @@ export const {
   databaseFetched,
   databaseFetching,
   databaseFetchingError,
+  setLogoutSpinner,
 } = actions;

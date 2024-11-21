@@ -9,7 +9,6 @@ import './priceFilterRange.scss';
 function PriceFilterRange() {
   const dispatch = useAppDispatch();
   const { minPrice, maxPrice } = useAppSelector((state) => state.rangeFilter);
-
   const onFilterChange = (v: number[], i: number) => {
     if (i === 0) {
       dispatch(minPriceFilterChanged(v[0]));

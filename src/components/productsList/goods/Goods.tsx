@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useAppSelector } from '../../../hooks/hooks';
+import { useAppSelector, useAppDispatch } from '../../../hooks/hooks';
 import Pagination from './Pagination';
 import GoodsItem from './GoodsItem';
 import Spinner from '../../spinner/Spinner';
 import { useGetProductsQuery } from '../../../api/apiSlice';
 import { IProduct } from '../../../types/types';
+import { changeCurrentPage } from '../../../slices/paginationSlice';
 import './goods.scss';
 
 function productRangeFilter(
@@ -113,6 +114,11 @@ function Goods() {
   const itemsView = renderItems(
     (filteredItems as IProduct[]).slice(firstProductIndex, lastProductIndex)
   );
+
+  const dispatch = useAppDispatch();
+  if (itemsView.length === 0 && isSuccess) {
+    dispatch(changeCurrentPage(1));
+  }
 
   return (
     <div className="goods">

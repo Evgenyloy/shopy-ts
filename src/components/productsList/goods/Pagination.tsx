@@ -23,7 +23,7 @@ const Pagination: FC<IPaginationProps> = ({
     pageNumber.push(i);
   }
 
-  if ((items as JSX.Element[]).length === 0) return null;
+  //if ((items as JSX.Element[]).length === 0) return null;
 
   return (
     <div className="pagination">

@@ -9,9 +9,40 @@ import { useAppSelector, useAuth } from '../../hooks/hooks';
 import { setOrders } from '../../slices/userSlice';
 import { setFavoriteItems } from '../../slices/userSlice';
 import Spinner from '../spinner/Spinner';
-
+import { clearError } from '../../utils/utils';
+import { setLogoutSpinner } from '../../slices/loginSlice';
 import './headerTools.scss';
 import { FC } from 'react';
+import { IOrder, IProduct } from '../../types/types';
+
+function spinnerVisibility(
+  databaseLoading: string,
+  authentication: string,
+  item: IOrder[] | IProduct[]
+) {
+  if (
+    (databaseLoading === 'loading' || authentication === 'loading') &&
+    item.length !== 0
+  ) {
+    return <Spinner className={'spinner-header'} />;
+  }
+
+  if (
+    databaseLoading === 'idle' &&
+    authentication === 'idle' &&
+    item.length > 0
+  ) {
+    return item.length;
+  }
+
+  if (
+    databaseLoading === 'error' &&
+    authentication === 'error' &&
+    item.length > 0
+  ) {
+    return item.length;
+  }
+}
 
 interface IHeaderToolsProps {
   handleClick: () => void;
@@ -26,7 +57,11 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
   const authentication = useAppSelector(
     (state) => state.login.loginAuthenticationStatus
   );
+  const logoutSpinner = useAppSelector((state) => state.login.logout);
+  const { emailError, passError } = useAppSelector((state) => state.error);
+
   const logOut = async () => {
+    dispatch(setLogoutSpinner(true));
     const auth = getAuth();
     await signOut(auth)
       .then(() => {
@@ -34,6 +69,7 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
         dispatch(setOrders([]));
         dispatch(setFavoriteItems([]));
         localStorage.removeItem('userData');
+        dispatch(setLogoutSpinner(false));
       })
       .catch((error) => {
         alert(error);
@@ -52,17 +88,7 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
       >
         <PiShoppingCartSimpleBold />
         <span className=" header-tools__item-span">
-          {databaseLoading === 'loading' || authentication === 'loading' ? (
-            <Spinner className={'spinner-header'} />
-          ) : null}
-          {databaseLoading === 'idle' ||
-          (authentication === 'idle' && orders.length > 0)
-            ? orders.length
-            : null}
-          {databaseLoading === 'error' ||
-          (authentication === 'error' && orders.length > 0)
-            ? orders.length
-            : null}
+          {spinnerVisibility(databaseLoading, authentication, orders)}
         </span>
       </NavLink>
       <NavLink
@@ -75,18 +101,7 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
       >
         <AiFillHeart />
         <span className=" header-tools__items">
-          {databaseLoading === 'loading' ||
-            (authentication === 'loading' && (
-              <Spinner className={'spinner-header'} />
-            ))}
-          {databaseLoading === 'idle' ||
-          (authentication === 'idle' && favorites.length > 0)
-            ? favorites.length
-            : null}
-          {databaseLoading === 'error' ||
-          (authentication === 'error' && favorites.length > 0)
-            ? favorites.length
-            : null}
+          {spinnerVisibility(databaseLoading, authentication, favorites)}
         </span>
       </NavLink>
       {isAuth ? (
@@ -94,12 +109,19 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
           <SlLogout />
         </div>
       ) : (
-        <NavLink to="/login" className="header-tools__item">
+        <NavLink
+          to="/login"
+          className="header-tools__item"
+          onClick={() => clearError(emailError, passError, dispatch)}
+        >
           <SlLogin />
         </NavLink>
       )}
 
-      <p className="header-tools__user">{user ? user?.email : null}</p>
+      <p className="header-tools__user">
+        {logoutSpinner ? 'logout...' : null}
+        {user && !logoutSpinner ? user?.email : null}
+      </p>
     </div>
   );
 };

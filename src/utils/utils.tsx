@@ -6,6 +6,7 @@ import {
   removeOrder,
   addOrder,
 } from '../slices/userSlice';
+import { setEmailError, setPasswordError } from '../slices/errorFormSlice';
 import { AppDispatch } from '../types/types';
 
 export const checkAvailability = (
@@ -110,4 +111,13 @@ export function classSetting(
     : (orderClass = className);
 
   return { favoriteClass, orderClass };
+}
+
+export function clearError(
+  emailError: string,
+  passError: string,
+  dispatch: AppDispatch
+) {
+  if (emailError) dispatch(setEmailError(''));
+  if (passError) dispatch(setPasswordError(''));
 }

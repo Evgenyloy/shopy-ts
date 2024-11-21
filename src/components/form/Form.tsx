@@ -11,7 +11,6 @@ const Form: FC<IFormProps> = ({ title, handleClick }) => {
   const [email, setEmail] = useState('');
   const [pass, setPass] = useState('');
   const { emailError, passError } = useAppSelector((state) => state.error);
-
   const handleEnterKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     email: string,
