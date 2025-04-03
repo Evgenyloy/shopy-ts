@@ -1,18 +1,18 @@
-import { FC } from 'react';
-import { IOrder } from '../../types/types';
-import { useState } from 'react';
-import { removeOrder } from '../../slices/userSlice';
-import { useAppDispatch } from '../../hooks/hooks';
-import { RiDeleteBinLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom';
-import { HiPlusSmall, HiOutlineMinusSmall } from 'react-icons/hi2';
-import { handlePlusClick, handleMinusClick } from '../../utils/utils';
+import { FC } from "react";
+import { IOrder } from "../../types/types";
+import { useState } from "react";
+import { removeOrder } from "../../slices/userSlice";
+import { useAppDispatch } from "../../hooks/hooks";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
+import { HiPlusSmall, HiOutlineMinusSmall } from "react-icons/hi2";
+import { handlePlusClick, handleMinusClick } from "../../utils/utils";
 
 interface ICheckoutItemProps {
   order: IOrder;
 }
 
-const CheckoutItem: FC<ICheckoutItemProps> = ({ order }) => {
+const CheckoutItem = ({ order }: ICheckoutItemProps) => {
   const dispatch = useAppDispatch();
   let [qty, setQty] = useState(order.quantity);
 
@@ -41,7 +41,7 @@ const CheckoutItem: FC<ICheckoutItemProps> = ({ order }) => {
       </div>
 
       <p className="checkout__price">
-        {(order.price * order.quantity).toFixed(2) + '$'}
+        {(order.price * order.quantity).toFixed(2) + "$"}
       </p>
       <p
         className="checkout__bin"

@@ -1,12 +1,11 @@
-import { NavLink } from 'react-router-dom';
-import './headerNav.scss';
-import { FC } from 'react';
+import { NavLink } from "react-router-dom";
+import "./headerNav.scss";
 
 interface IHeaderNavProps {
   handleClick?: () => void;
 }
 
-const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
+const HeaderNav = ({ handleClick }: IHeaderNavProps) => {
   return (
     <nav className="headerNav">
       <ul className="headerNav__inner">
@@ -15,7 +14,7 @@ const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
             end
             to="/"
             className={({ isActive }) =>
-              isActive ? 'headerNav__link red' : ' headerNav__link'
+              isActive ? "headerNav__link red" : " headerNav__link"
             }
             onClick={handleClick}
           >
@@ -27,7 +26,7 @@ const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
           <NavLink
             to="/products"
             className={({ isActive }) =>
-              isActive ? 'headerNav__link red' : ' headerNav__link'
+              isActive ? "headerNav__link red" : " headerNav__link"
             }
             onClick={handleClick}
           >
@@ -39,7 +38,7 @@ const HeaderNav: FC<IHeaderNavProps> = ({ handleClick }) => {
             to="/about"
             onClick={handleClick}
             className={({ isActive }) =>
-              isActive ? 'headerNav__link red' : ' headerNav__link'
+              isActive ? "headerNav__link red" : " headerNav__link"
             }
           >
             About

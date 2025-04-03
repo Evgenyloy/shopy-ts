@@ -1,26 +1,25 @@
-import { AiOutlineHeart } from 'react-icons/ai';
-import { MdArrowBackIos } from 'react-icons/md';
-import { IoIosBasket } from 'react-icons/io';
-import { HiPlusSmall, HiOutlineMinusSmall } from 'react-icons/hi2';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../../hooks/hooks';
-import { IProduct } from '../../types/types';
-import { useAppDispatch } from '../../hooks/hooks';
-import { FC } from 'react';
-import { useState } from 'react';
+import { AiOutlineHeart } from "react-icons/ai";
+import { MdArrowBackIos } from "react-icons/md";
+import { IoIosBasket } from "react-icons/io";
+import { HiPlusSmall, HiOutlineMinusSmall } from "react-icons/hi2";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../hooks/hooks";
+import { IProduct } from "../../types/types";
+import { useAppDispatch } from "../../hooks/hooks";
+import { useState } from "react";
 import {
   handleFavoriteClick,
   handleBasketClick,
   handleOrderClick,
-} from '../../utils/utils';
-import { classSetting } from '../../utils/utils';
-import { handlePlusClick, handleMinusClick } from '../../utils/utils';
+} from "../../utils/utils";
+import { classSetting } from "../../utils/utils";
+import { handlePlusClick, handleMinusClick } from "../../utils/utils";
 
 interface IProductItemProps {
   product: IProduct;
 }
 
-const ProductItem: FC<IProductItemProps> = ({ product }) => {
+const ProductItem = ({ product }: IProductItemProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { favorites, orders } = useAuth();
@@ -29,7 +28,7 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
   let [qty, setQty] = useState(orderItem[0] ? orderItem[0].quantity : 1);
   const price = qty * (product?.price as number);
 
-  const ClassName = classSetting(favorites, orders, product, 'product__svg');
+  const ClassName = classSetting(favorites, orders, product, "product__svg");
 
   return (
     <>
@@ -56,7 +55,7 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
               className="product__input"
               value={+qty}
               readOnly
-              style={qty > 9 ? { width: '30px' } : { width: '20px' }}
+              style={qty > 9 ? { width: "30px" } : { width: "20px" }}
             />
             <HiPlusSmall
               className="product__quantity-svg"
@@ -65,7 +64,7 @@ const ProductItem: FC<IProductItemProps> = ({ product }) => {
           </div>
         </div>
         <div className="product__order-inner">
-          <p className="product__price">{price.toFixed(2) + ' $'}</p>
+          <p className="product__price">{price.toFixed(2) + " $"}</p>
           <div className="product__order-wrapper">
             <IoIosBasket
               className={ClassName.orderClass}

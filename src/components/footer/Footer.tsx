@@ -1,8 +1,7 @@
-import React from 'react';
-import Logo from '../logo/Logo';
-import HeaderNav from '../header/HeaderNav';
-import paymentImg from '../../image/payment_images.png';
-import './footer.scss';
+import Logo from "../logo/Logo";
+import HeaderNav from "../header/HeaderNav";
+import paymentImg from "../../image/payment_images.png";
+import "./footer.scss";
 
 function Footer() {
   return (

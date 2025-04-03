@@ -1,16 +1,16 @@
-import { useAppDispatch } from '../../hooks/hooks';
-import React, { useState } from 'react';
-import { Formik, Form } from 'formik';
-import * as Yup from 'yup';
-import { deleteOrders } from '../../slices/userSlice';
-import CheckoutPopup from './CheckoutPopup';
-import { MdArrowBackIos } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import CheckoutItem from './CheckoutItem';
-import { useAuth } from '../../hooks/hooks';
-import { calculationOfTheSum } from '../../utils/utils';
-import CustomInput from './CustomCheckoutInput';
-import './checkout.scss';
+import { useAppDispatch } from "../../hooks/hooks";
+import { useState } from "react";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import { deleteOrders } from "../../slices/userSlice";
+import CheckoutPopup from "./CheckoutPopup";
+import { MdArrowBackIos } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import CheckoutItem from "./CheckoutItem";
+import { useAuth } from "../../hooks/hooks";
+import { calculationOfTheSum } from "../../utils/utils";
+import CustomInput from "./CustomCheckoutInput";
+import "./checkout.scss";
 
 const Checkout = () => {
   const dispatch = useAppDispatch();
@@ -25,11 +25,7 @@ const Checkout = () => {
   };
 
   const renderItems = orders.map((order) => {
-    return (
-      <React.Fragment key={order.id}>
-        <CheckoutItem order={order} />
-      </React.Fragment>
-    );
+    return <CheckoutItem order={order} key={order.id} />;
   });
 
   return (
@@ -44,11 +40,11 @@ const Checkout = () => {
             </div>
           </div>
           <Formik
-            initialValues={{ name: '', email: '', phone: '' }}
-            onSubmit={(values) => handleButtonClick()}
+            initialValues={{ name: "", email: "", phone: "" }}
+            onSubmit={() => handleButtonClick()}
             validationSchema={Yup.object({
-              name: Yup.string().required('This field is required'),
-              phone: Yup.number().required('This field is required'),
+              name: Yup.string().required("This field is required"),
+              phone: Yup.number().required("This field is required"),
               email: Yup.string().email(),
             })}
           >
@@ -72,7 +68,7 @@ const Checkout = () => {
               <h3 className="checkout__details">purchase details</h3>
               <div className="checkout__orders">{renderItems}</div>
               <p className="checkout__total">
-                Total Price <span>{calculationOfTheSum(orders) + '$'}</span>
+                Total Price <span>{calculationOfTheSum(orders) + "$"}</span>
               </p>
               <button className="checkout__button" type="submit">
                 Valid purchase

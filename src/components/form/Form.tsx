@@ -1,15 +1,15 @@
-import { FC, useState } from 'react';
-import { useAppSelector } from '../../hooks/hooks';
-import './form.scss';
+import { useState } from "react";
+import { useAppSelector } from "../../hooks/hooks";
+import "./form.scss";
 
 interface IFormProps {
   title: string;
   handleClick: (email: string, password: string) => void;
 }
 
-const Form: FC<IFormProps> = ({ title, handleClick }) => {
-  const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+const Form = ({ title, handleClick }: IFormProps) => {
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
   const { emailError, passError } = useAppSelector((state) => state.error);
   const handleEnterKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
@@ -17,7 +17,7 @@ const Form: FC<IFormProps> = ({ title, handleClick }) => {
     pass: string
   ) => {
     if (!email || !pass) return;
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleClick(email, pass);
     }
   };

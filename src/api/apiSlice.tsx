@@ -1,24 +1,30 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IProduct } from '../types/types';
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { IProduct } from "../types/types";
 
 export const apiSlice = createApi({
-  reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://fakestoreapi.com' }),
+  reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://fakestoreapi.com",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  }),
   endpoints: (builder) => ({
     getProducts: builder.query<IProduct[], void>({
       query: () => ({
         url: `/products`,
         params: {
-          apikey: '',
-          plot: 'full',
+          apikey: "",
+          plot: "full",
         },
-        method: 'GET',
+        method: "GET",
       }),
     }),
     getASingleProduct: builder.query<IProduct, string>({
       query: (arg) => ({
         url: `/products/${arg}`,
-        method: 'GET',
+        method: "GET",
       }),
     }),
   }),

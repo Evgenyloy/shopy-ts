@@ -1,56 +1,20 @@
-import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { getAuth, signOut } from 'firebase/auth';
-import { PiShoppingCartSimpleBold } from 'react-icons/pi';
-import { AiFillHeart } from 'react-icons/ai';
-import { SlLogin, SlLogout } from 'react-icons/sl';
-import { removeUser } from '../../slices/userSlice';
-import { useAppSelector, useAuth } from '../../hooks/hooks';
-import { setOrders } from '../../slices/userSlice';
-import { setFavoriteItems } from '../../slices/userSlice';
-import Spinner from '../spinner/Spinner';
-import { clearError } from '../../utils/utils';
-import { setLogoutSpinner } from '../../slices/loginSlice';
-import './headerTools.scss';
-import { FC } from 'react';
-import { IOrder, IProduct } from '../../types/types';
-
-function spinnerVisibility(
-  databaseLoading: string,
-  authentication: string,
-  item: IOrder[] | IProduct[]
-) {
-  if (
-    (databaseLoading === 'loading' || authentication === 'loading') &&
-    item.length !== 0
-  ) {
-    return <Spinner className={'spinner-header'} />;
-  }
-
-  if (
-    databaseLoading === 'idle' &&
-    authentication === 'idle' &&
-    item.length > 0
-  ) {
-    return item.length;
-  }
-
-  if (
-    databaseLoading === 'error' &&
-    authentication === 'error' &&
-    item.length > 0
-  ) {
-    return item.length;
-  }
-}
+import { NavLink } from "react-router-dom";
+import { PiShoppingCartSimpleBold } from "react-icons/pi";
+import { AiFillHeart } from "react-icons/ai";
+import { SlLogin, SlLogout } from "react-icons/sl";
+import { useAppSelector, useAuth, useAppDispatch } from "../../hooks/hooks";
+import { clearError } from "../../utils/utils";
+import { spinnerVisibility } from "./utils";
+import { useLogout } from "./useLogout";
+import "./headerTools.scss";
 
 interface IHeaderToolsProps {
   handleClick: () => void;
 }
 
-const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
+const HeaderTools = ({ handleClick }: IHeaderToolsProps) => {
   const { user, orders, favorites, isAuth } = useAuth();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const databaseLoading = useAppSelector(
     (store) => store.login.loadingDatabaseStatus
   );
@@ -59,31 +23,16 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
   );
   const logoutSpinner = useAppSelector((state) => state.login.logout);
   const { emailError, passError } = useAppSelector((state) => state.error);
-
-  const logOut = async () => {
-    dispatch(setLogoutSpinner(true));
-    const auth = getAuth();
-    await signOut(auth)
-      .then(() => {
-        dispatch(removeUser());
-        dispatch(setOrders([]));
-        dispatch(setFavoriteItems([]));
-        localStorage.removeItem('userData');
-        dispatch(setLogoutSpinner(false));
-      })
-      .catch((error) => {
-        alert(error);
-      });
-  };
+  const { logOut } = useLogout();
 
   return (
     <div className="header-tools">
       <NavLink
         onClick={handleClick}
-        to={'/basket'}
+        to={"/basket"}
         className={({ isActive }) =>
-          'header-tools__item header-tools__item-basket' +
-          (!isActive ? ' unselected' : ' red')
+          "header-tools__item header-tools__item-basket" +
+          (!isActive ? " unselected" : " red")
         }
       >
         <PiShoppingCartSimpleBold />
@@ -95,8 +44,8 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
         onClick={handleClick}
         to="/favorites"
         className={({ isActive }) =>
-          'header-tools__item header-tools__item-favorites' +
-          (!isActive ? ' unselected' : ' red')
+          "header-tools__item header-tools__item-favorites" +
+          (!isActive ? " unselected" : " red")
         }
       >
         <AiFillHeart />
@@ -119,7 +68,7 @@ const HeaderTools: FC<IHeaderToolsProps> = ({ handleClick }) => {
       )}
 
       <p className="header-tools__user">
-        {logoutSpinner ? 'logout...' : null}
+        {logoutSpinner ? "logout..." : null}
         {user && !logoutSpinner ? user?.email : null}
       </p>
     </div>

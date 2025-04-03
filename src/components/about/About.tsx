@@ -1,4 +1,4 @@
-import './about.scss';
+import "./about.scss";
 
 const About = () => {
   return (
@@ -6,24 +6,27 @@ const About = () => {
       <div className="about__inner">
         <h2 className="about__title">React educational project</h2>
         <p className="about__text">
-          gitHub:{' '}
+          GitHub:{" "}
           <a
             className="about__link"
             href="https://github.com/Evgenyloy/shopy"
             target="blanc"
           >
-            shopy
+            Shopy
           </a>
         </p>
         <p className="about__text">
-          api:{' '}
+          API:{" "}
           <a
             className="about__link"
             href="https://fakestoreapi.com"
             target="blanc"
           >
-            fakestoreapi.com
+            Fakestoreapi.com
           </a>
+        </p>
+        <p className="about__text">
+          Stack: Redux, RTK Query, React Router Dom, Firebase
         </p>
       </div>
     </div>

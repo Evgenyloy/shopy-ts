@@ -1,28 +1,8 @@
-import { Link } from 'react-router-dom';
-import { useGetProductsQuery } from '../../api/apiSlice';
-import Spinner from '../spinner/Spinner';
-import './arrivals.scss';
-import { IProduct } from '../../types/types';
-
-function renderItemView(item: IProduct[]) {
-  const renderItem = item.map((item) => {
-    return (
-      <div className="arrivals__item" key={item.id}>
-        <div className="arrivals__img-cont">
-          <img className="arrivals__img" src={item.image} alt="product" />
-        </div>
-        <h2 className="arrivals__item-title">{item.title}</h2>
-        <p className="arrivals__item-price">{item.price + ' $'}</p>
-        <Link
-          to={`/product/${item.id}`}
-          className="arrivals__link"
-          onClick={() => window.scrollTo(0, 0)}
-        ></Link>
-      </div>
-    );
-  });
-  return renderItem;
-}
+import { Link } from "react-router-dom";
+import { useGetProductsQuery } from "../../api/apiSlice";
+import Spinner from "../spinner/Spinner";
+import ArrivalsItemsView from "./ArrivalsItemsView";
+import "./arrivals.scss";
 
 function Arrivals() {
   const {
@@ -32,7 +12,7 @@ function Arrivals() {
     isSuccess,
   } = useGetProductsQuery();
   const item = products.slice(15, 19);
-  const renderItem = renderItemView(item);
+  const renderItem = ArrivalsItemsView(item);
 
   return (
     <div className="arrivals">

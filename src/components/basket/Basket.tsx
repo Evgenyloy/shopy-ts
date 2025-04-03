@@ -1,20 +1,15 @@
-import { Fragment } from 'react';
-import { useAuth } from '../../hooks/hooks';
-import { Link, useNavigate } from 'react-router-dom';
-import BasketItem from './BasketItem';
-import { calculationOfTheSum } from '../../utils/utils';
-import './basket.scss';
+import { useAuth } from "../../hooks/hooks";
+import { Link, useNavigate } from "react-router-dom";
+import BasketItem from "./BasketItem";
+import { calculationOfTheSum } from "../../utils/utils";
+import "./basket.scss";
 
 function Basket() {
   const { orders } = useAuth();
   const navigate = useNavigate();
 
   const renderItems = orders.map((order) => {
-    return (
-      <Fragment key={order.id}>
-        <BasketItem order={order} />
-      </Fragment>
-    );
+    return <BasketItem order={order} key={order.id} />;
   });
 
   return (
@@ -30,7 +25,7 @@ function Basket() {
         <div className="basket__inner">
           {renderItems.length === 0 ? (
             <div className="basket__header-stub">
-              There's nothing here yet, but you might find something{' '}
+              There's nothing here yet, but you might find something{" "}
               <Link to="/products" className="basket-stubLink">
                 here
               </Link>
@@ -41,17 +36,17 @@ function Basket() {
         </div>
         <div
           className="basket__footer"
-          style={orders.length === 0 ? { padding: '30px 10px' } : undefined}
+          style={orders.length === 0 ? { padding: "30px 10px" } : undefined}
         >
           <div className="basket__footer-inner">
             <p className="basket__footer-total">Total</p>
             <p className="basket__footer-price">
-              {calculationOfTheSum(orders) + '$'}
+              {calculationOfTheSum(orders) + "$"}
             </p>
             {orders.length === 0 ? null : (
               <button
                 className="basket__footer-button"
-                onClick={() => navigate('/checkout')}
+                onClick={() => navigate("/checkout")}
               >
                 order now
               </button>

@@ -1,8 +1,8 @@
-import { IoMdMailOpen } from 'react-icons/io';
-import { RiFacebookFill } from 'react-icons/ri';
-import { BsTwitter, BsInstagram, BsFillTelephoneFill } from 'react-icons/bs';
-import { TfiGoogle } from 'react-icons/tfi';
-import './headerContacts.scss';
+import { IoMdMailOpen } from "react-icons/io";
+import { RiFacebookFill } from "react-icons/ri";
+import { BsTwitter, BsInstagram, BsFillTelephoneFill } from "react-icons/bs";
+import { TfiGoogle } from "react-icons/tfi";
+import "./headerContacts.scss";
 
 const HeaderContacts = () => {
   return (
@@ -14,7 +14,7 @@ const HeaderContacts = () => {
               <IoMdMailOpen /> info@shopy.com
             </div>
             <div className="contacts__tel">
-              <BsFillTelephoneFill /> 996 - 5553 - 453 evgenyloy@gmail.com
+              <BsFillTelephoneFill /> 996 - 5553 - 453
             </div>
           </div>
           <div className="header-contacts__inner-col2">

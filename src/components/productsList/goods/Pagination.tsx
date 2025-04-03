@@ -1,7 +1,6 @@
-import { changeCurrentPage } from '../../../slices/paginationSlice';
-import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
-import { FC } from 'react';
-import './pagination.scss';
+import { changeCurrentPage } from "../../../slices/paginationSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import "./pagination.scss";
 
 interface IPaginationProps {
   totalProducts: number;
@@ -9,11 +8,11 @@ interface IPaginationProps {
   productsPerPage: number;
 }
 
-const Pagination: FC<IPaginationProps> = ({
+const Pagination = ({
   totalProducts,
   items,
   productsPerPage,
-}): JSX.Element | null => {
+}: IPaginationProps): JSX.Element | null => {
   const dispatch = useAppDispatch();
 
   const currentPage = useAppSelector((state) => state.pagination.currentPage);
@@ -31,8 +30,8 @@ const Pagination: FC<IPaginationProps> = ({
         {pageNumber.map((number) => {
           let clazz;
           currentPage === number
-            ? (clazz = 'pagination__page-link pagination__page-link_current')
-            : (clazz = 'pagination__page-link');
+            ? (clazz = "pagination__page-link pagination__page-link_current")
+            : (clazz = "pagination__page-link");
           return (
             <li className="pagination__page-item" key={number}>
               <div

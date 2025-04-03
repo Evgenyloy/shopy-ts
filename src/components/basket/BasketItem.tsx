@@ -1,17 +1,17 @@
-import { FC, useState } from 'react';
-import { useAppDispatch } from '../../hooks/hooks';
-import { Link } from 'react-router-dom';
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
-import { BsXLg } from 'react-icons/bs';
-import { removeOrder } from '../../slices/userSlice';
-import { IOrder } from '../../types/types';
-import { handlePlusClick, handleMinusClick } from '../../utils/utils';
+import { useState } from "react";
+import { useAppDispatch } from "../../hooks/hooks";
+import { Link } from "react-router-dom";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { BsXLg } from "react-icons/bs";
+import { removeOrder } from "../../slices/userSlice";
+import { IOrder } from "../../types/types";
+import { handlePlusClick, handleMinusClick } from "../../utils/utils";
 
 interface IBasketItemProps {
   order: IOrder;
 }
 
-const BasketItem: FC<IBasketItemProps> = ({ order }) => {
+const BasketItem = ({ order }: IBasketItemProps) => {
   const dispatch = useAppDispatch();
   let [qty, setQty] = useState(order.quantity);
   const [price, setPrice] = useState(order.price);
@@ -53,7 +53,7 @@ const BasketItem: FC<IBasketItemProps> = ({ order }) => {
             />
           </div>
         </div>
-        <p className="basket-item__price">{price.toFixed(2) + '$'}</p>
+        <p className="basket-item__price">{price.toFixed(2) + "$"}</p>
         <div
           className="basket-item__delete-btn"
           onClick={() => dispatch(removeOrder(order.id))}

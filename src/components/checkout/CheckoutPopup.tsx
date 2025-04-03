@@ -1,19 +1,18 @@
-import { useNavigate } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
-import { FC, useRef } from 'react';
-
-import './checkoutPopup.scss';
+import { useNavigate } from "react-router-dom";
+import { CSSTransition } from "react-transition-group";
+import { useRef } from "react";
+import "./checkoutPopup.scss";
 
 interface ICheckoutPopupProps {
   popup: boolean;
   closePopup: () => void;
 }
 
-const CheckoutPopup: FC<ICheckoutPopupProps> = ({ popup, closePopup }) => {
+const CheckoutPopup = ({ popup, closePopup }: ICheckoutPopupProps) => {
   const navigate = useNavigate();
   const handleClick = () => {
     closePopup();
-    navigate('/');
+    navigate("/");
     window.scrollTo(0, 0);
   };
 
@@ -34,7 +33,7 @@ const CheckoutPopup: FC<ICheckoutPopupProps> = ({ popup, closePopup }) => {
         <div className="checkout-popup" ref={nodeRef}>
           <div className="checkout-popup__text-block">
             <p className="checkout-popup__text">
-              {' '}
+              {" "}
               After confirming the order, our manager will contact you within
               five minutes.
             </p>
