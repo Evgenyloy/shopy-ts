@@ -33,7 +33,7 @@ const BasketItem = ({ order }: IBasketItemProps) => {
           <input
             name="basket-name"
             className="basket-item__input"
-            type="number"
+            type="text"
             value={qty}
             readOnly
           />

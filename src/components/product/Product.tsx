@@ -1,9 +1,9 @@
-import { useParams } from 'react-router-dom';
-import { useGetASingleProductQuery } from '../../api/apiSlice';
-import Spinner from '../spinner/Spinner';
-import NewsLetter from '../newsLetter/NewsLetter';
-import ProductItem from './ProductItem';
-import './product.scss';
+import { useParams } from "react-router-dom";
+import { useGetASingleProductQuery } from "../../api/apiSlice";
+import Spinner from "../spinner/Spinner";
+import NewsLetter from "../newsLetter/NewsLetter";
+import ProductItem from "./ProductItem";
+import "./product.scss";
 
 const Product = () => {
   const { id } = useParams();
@@ -24,14 +24,14 @@ const Product = () => {
               (product === null && (
                 <div
                   style={{
-                    textAlign: 'center',
-                    color: '#34404b',
-                    fontSize: '22px',
-                    margin: '0 auto',
-                    paddingTop: '150px',
+                    textAlign: "center",
+                    color: "#34404b",
+                    fontSize: "22px",
+                    margin: "0 auto",
+                    paddingTop: "150px",
                   }}
                 >
-                  something went wrong please reload the page
+                  Something went wrong please reload the page
                 </div>
               ))}
             {isSuccess && product !== null && <ProductItem product={product} />}

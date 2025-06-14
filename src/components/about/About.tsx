@@ -4,12 +4,12 @@ const About = () => {
   return (
     <div className="about">
       <div className="about__inner">
-        <h2 className="about__title">React educational project</h2>
+        <h2 className="about__title">React portfolio project</h2>
         <p className="about__text">
           GitHub:{" "}
           <a
             className="about__link"
-            href="https://github.com/Evgenyloy/shopy"
+            href="https://github.com/Evgenyloy/shopy-ts"
             target="blanc"
           >
             Shopy

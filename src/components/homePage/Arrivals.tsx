@@ -28,7 +28,7 @@ function Arrivals() {
         {isFetching && <Spinner />}
         {isError && (
           <div className="arrivals__card-error">
-            oops something went wrong please reload the page
+            Oops something went wrong please reload the page
           </div>
         )}
         {isSuccess && renderItem}

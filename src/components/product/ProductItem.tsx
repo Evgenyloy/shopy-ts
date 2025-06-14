@@ -51,7 +51,7 @@ const ProductItem = ({ product }: IProductItemProps) => {
             />
             <input
               name="product-input"
-              type="number"
+              type="text"
               className="product__input"
               value={+qty}
               readOnly

@@ -28,7 +28,7 @@ function BestSales() {
         {isFetching && <Spinner />}
         {isError && (
           <div className="best-sales__card-error">
-            oops something went wrong please reload the page
+            Oops something went wrong please reload the page
           </div>
         )}
         {isSuccess && renderItems.slice(0, 3)}
