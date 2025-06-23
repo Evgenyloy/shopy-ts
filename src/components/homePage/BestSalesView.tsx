@@ -1,6 +1,7 @@
 import { Rating } from "react-simple-star-rating";
 import { IProduct } from "../../types/types";
 import { Link } from "react-router-dom";
+import localProducts from "../../api/products.json";
 
 function BestSalesView(products: IProduct[]) {
   const renderItems = products.map((item) => {
@@ -9,8 +10,12 @@ function BestSalesView(products: IProduct[]) {
         <div className="best-sales__img-cont">
           <img
             className="best-sales__img"
-            src={item?.image}
-            alt="product"
+            src={
+              item.image
+                ? item.image
+                : localProducts.filter((i) => i.id === item.id)[0].image
+            }
+            alt={item?.title}
             loading="lazy"
           />
         </div>

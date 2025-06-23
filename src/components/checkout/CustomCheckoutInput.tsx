@@ -1,14 +1,14 @@
-import { useField } from 'formik';
+import { useField } from "formik";
 
 function handleFocus(e: React.FocusEvent<HTMLInputElement, Element>) {
   if (e.target.parentNode === null) return;
-  (e.target.parentNode as Element).classList.add('active');
+  (e.target.parentNode as Element).classList.add("active");
 }
 
 function handleBlur(e: React.FocusEvent<HTMLInputElement, Element>) {
   if (e.target.value) return;
   if (e.target.parentNode === null) return;
-  (e.target.parentNode as Element).classList.remove('active');
+  (e.target.parentNode as Element).classList.remove("active");
 }
 
 function CustomInput({
@@ -29,8 +29,8 @@ function CustomInput({
         {...field}
         className={
           meta.touched && meta.error
-            ? 'checkout__input input-error'
-            : 'checkout__input'
+            ? "checkout__input input-error"
+            : "checkout__input"
         }
         onFocus={handleFocus}
         onBlur={handleBlur}

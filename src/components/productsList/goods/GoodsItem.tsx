@@ -14,6 +14,7 @@ import {
   handleOrderClick,
 } from "../../../utils/utils";
 import { classSetting } from "../../../utils/utils";
+import localProducts from "../../../api/products.json";
 
 interface IGoodsItemProps {
   item: IProduct;
@@ -31,7 +32,15 @@ const GoodsItem = ({ item, cross }: IGoodsItemProps) => {
   return (
     <div className="goods__item " key={item.id}>
       <div className="goods__img-cont">
-        <img className="goods__img" src={item.image} alt="" />
+        <img
+          className="goods__img"
+          src={
+            item.image
+              ? item.image
+              : localProducts.filter((i) => i.id === item.id)[0].image
+          }
+          alt={item.title}
+        />
       </div>
       <h2 className="goods__title">{item.title}</h2>
       <div className="goods__item-inner">

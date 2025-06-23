@@ -1,9 +1,10 @@
-import { IoIosMail } from 'react-icons/io';
-import { useState } from 'react';
-import './newsLetter.scss';
+import { IoIosMail } from "react-icons/io";
+import { useState } from "react";
+import "./newsLetter.scss";
 
 function NewsLetter() {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
+  const [mail, setMail] = useState(false);
 
   return (
     <div className="news-letter">
@@ -19,24 +20,37 @@ function NewsLetter() {
             <div className="news-letter__svg-wrapper">
               <IoIosMail className="news-letter__svg" />
               <input
+                disabled={mail}
                 className="news-letter__input"
-                type="text"
-                placeholder="type your email here"
+                type="email"
+                placeholder={
+                  mail
+                    ? "we sent a message to your email"
+                    : "type your email here"
+                }
                 name="mail"
                 value={value}
-                onChange={(e) => setValue(e.target.value)}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
                 onKeyUp={(e) => {
-                  if (e.key === 'Enter') {
-                    setValue('');
+                  if (e.key === "Enter") {
+                    setValue("");
+                    setMail(true);
                   }
                 }}
               />
             </div>
             <button
               className="news-letter__button"
-              onClick={() => setValue('')}
+              onClick={() => {
+                if (!value) return;
+                setValue("");
+                setMail(true);
+              }}
+              disabled={mail ? true : false}
             >
-              join us
+              {mail ? "joined" : "join us"}
             </button>
           </div>
         </div>

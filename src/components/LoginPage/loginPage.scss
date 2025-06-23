@@ -6,27 +6,39 @@
 
   background-color: #f7f4f4;
   text-align: center;
+
   &__inner {
-    width: 351px;
-    padding: 40px 40px 20px 40px;
+    width: 100%;
+    max-width: 351px;
+    padding: 40px 30px 20px 30px;
     border-radius: 5px;
     background-color: #fff;
     box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
     margin-bottom: 300px;
   }
+
   &__title {
     font-size: 28px;
     font-weight: 500;
     margin-bottom: 20px;
     color: #414b53;
   }
+
   &__paragraph {
+    line-height: 1.5;
     font-size: 22px;
     font-weight: 500;
     margin-bottom: 20px;
     color: #34404b;
+
     a {
       color: #ff5912;
     }
+  }
+}
+
+@media(max-width:400px) {
+  .login-page__inner {
+    padding: 10px;
   }
 }

@@ -54,7 +54,7 @@ const Checkout = () => {
                   <CustomInput type="text" name="name" label="name" />
                 </div>
                 <div className="checkout__input-cont">
-                  <CustomInput type="number" name="phone" label="phone" />
+                  <CustomInput type="phone" name="phone" label="phone" />
                 </div>
                 <div className="checkout__input-cont">
                   <CustomInput

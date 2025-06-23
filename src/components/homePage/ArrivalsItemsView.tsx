@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { IProduct } from "../../types/types";
-
+import localProducts from "../../api/products.json";
 function ArrivalsItemsView(item: IProduct[]) {
   const renderItem = item.map((item) => {
     return (
@@ -8,8 +8,12 @@ function ArrivalsItemsView(item: IProduct[]) {
         <div className="arrivals__img-cont">
           <img
             className="arrivals__img"
-            src={item.image}
-            alt="product"
+            src={
+              item.image
+                ? item.image
+                : localProducts.filter((i) => i.id === item.id)[0].image
+            }
+            alt={item.title}
             loading="lazy"
           />
         </div>

@@ -7,6 +7,7 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { Link } from "react-router-dom";
 import { HiPlusSmall, HiOutlineMinusSmall } from "react-icons/hi2";
 import { handlePlusClick, handleMinusClick } from "../../utils/utils";
+import localProducts from "../../api/products.json";
 
 interface ICheckoutItemProps {
   order: IOrder;
@@ -19,8 +20,12 @@ const CheckoutItem = ({ order }: ICheckoutItemProps) => {
   return (
     <div className="checkout__order-item" key={order.id}>
       <img
-        src={order.image}
-        alt="checkout__item-img"
+        src={
+          order.image
+            ? order.image
+            : localProducts.filter((i) => i.id === order.id)[0].image
+        }
+        alt={order.title}
         className="checkout__item-img"
       />
       <Link className="checkout__item" to={`/product/${order.id}`}>
