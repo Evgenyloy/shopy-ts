@@ -11,7 +11,7 @@ function BestSales() {
     isSuccess,
   } = useGetProductsQuery();
 
-  const renderItems = BestSalesView(products);
+  const items = products.slice(0, 3);
 
   return (
     <div className="best-sales">
@@ -31,7 +31,7 @@ function BestSales() {
             Oops something went wrong please reload the page
           </div>
         )}
-        {isSuccess && renderItems.slice(0, 3)}
+        {isSuccess && <BestSalesView products={items} />}
       </div>
     </div>
   );

@@ -11,8 +11,7 @@ function Arrivals() {
     isError,
     isSuccess,
   } = useGetProductsQuery();
-  const item = products.slice(15, 19);
-  const renderItem = ArrivalsItemsView(item);
+  const items = products.slice(15, 19);
 
   return (
     <div className="arrivals">
@@ -31,7 +30,7 @@ function Arrivals() {
             Oops something went wrong please reload the page
           </div>
         )}
-        {isSuccess && renderItem}
+        {isSuccess && <ArrivalsItemsView items={items} />}
       </div>
       <div className="arrivals__btn-cont">
         <Link
