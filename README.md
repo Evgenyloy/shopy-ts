@@ -1,6 +1,6 @@
 # 🛍️ Shopy — E-Commerce на TypeScript
 
-[![Live Demo](https://img.shields.io/badge/Demo-Vercel-green?style=for-the-badge)](https://shopy-ts.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Demo-Vercel-green?style=for-the-badge)](https://shopy-ts-two.vercel.app)
 
 <img src="public/preview.gif" alt="Демонстрация работы приложения" width="800"/>
 
@@ -25,8 +25,10 @@
 
 | Категория       | Технологии                                                                 |
 |----------------|---------------------------------------------------------------------------|
-| Фронтенд       | React 18, TypeScript, Redux Toolkit, RTK Query                           |
-| API            | FakeStoreAPI, Firebase Auth                                              |
-| Инструменты    | Vite                                        |
+| Фронтенд       | React 18, TypeScript, Redux Toolkit, RTK Query, React Router Dom                      |
+| API            | FakeStoreAPI, Firebase Auth, Cloud Firestore                                            |
+| Инструменты    | CRA                                   |
 
 
+## Запуск
+npm start
