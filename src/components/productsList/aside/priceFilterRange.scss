@@ -4,7 +4,7 @@
   max-width: 268px;
 
   &__title {
-    font-family: 'Harmonia Sans Pro Cyr';
+    font-family: "Harmonia Sans Pro Cyr";
     font-size: 20px;
     font-weight: 900;
     color: #34404b;
@@ -33,7 +33,7 @@
   background-color: #c2c4c5;
 }
 
-.example-thumb.example-thumb-0[aria-label='Lower thumb'] {
+.example-thumb.example-thumb-0[aria-label="Lower thumb"] {
   background-color: #fff;
   height: 18px;
   width: 18px;
@@ -41,7 +41,7 @@
   top: -7px;
   border-radius: 3px;
 }
-.example-thumb.example-thumb-1[aria-label='Upper thumb'] {
+.example-thumb.example-thumb-1[aria-label="Upper thumb"] {
   background-color: #fff;
   height: 18px;
   width: 18px;
@@ -53,7 +53,7 @@
 .horizontal-slider {
   width: 175px;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     left: -5px;
@@ -62,7 +62,7 @@
     background-color: #c2c4c5;
   }
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -2px;
     right: -5px;
@@ -85,4 +85,8 @@
   .horizontal-slider {
     width: 100%;
   }
+}
+
+.example-thumb {
+  cursor: pointer;
 }
