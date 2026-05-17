@@ -1,5 +1,5 @@
-import { FC } from "react";
-import { IOrder } from "../../types/types";
+import type { FC } from "react";
+import type { IOrder } from "../../types";
 import { useState } from "react";
 import { removeOrder } from "../../slices/userSlice";
 import { useAppDispatch } from "../../hooks/hooks";

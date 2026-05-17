@@ -1,11 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: { radioFilter: string } = {
-  radioFilter: '',
+  radioFilter: "",
 };
 
 const radioFilterSlice = createSlice({
-  name: 'radioFilter',
+  name: "radioFilter",
   initialState,
   reducers: {
     radioFilterChanged: (state, action: PayloadAction<string>) => {

@@ -6,7 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { useAuth } from "../../../hooks/hooks";
 import { Rating } from "react-simple-star-rating";
-import { IProduct } from "../../../types/types";
+import type { IProduct } from "../../../types";
 import { useState } from "react";
 import {
   handleFavoriteClick,

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IProduct } from "../types/types";
+import type { IProduct } from "../types";
 import localProducts from "./products.json";
 
 const API = "https://fakestoreapi.com";

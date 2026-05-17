@@ -4,7 +4,7 @@ import Pagination from "./Pagination";
 import GoodsItem from "./GoodsItem";
 import Spinner from "../../spinner/Spinner";
 import { useGetProductsQuery } from "../../../api/apiSlice";
-import { IProduct } from "../../../types/types";
+import type { IProduct } from "../../../types";
 import { changeCurrentPage } from "../../../slices/paginationSlice";
 import "./goods.scss";
 import {
@@ -65,12 +65,12 @@ function Goods() {
   const filteredItems = productsRadioFilter(
     productCategoryFilter(
       productRangeFilter(products as IProduct[], minPrice, maxPrice),
-      categories
+      categories,
     ),
-    radioFilter
+    radioFilter,
   );
   const itemsView = renderItems(
-    (filteredItems as IProduct[]).slice(firstProductIndex, lastProductIndex)
+    (filteredItems as IProduct[]).slice(firstProductIndex, lastProductIndex),
   );
 
   if (itemsView.length === 0 && isSuccess) {

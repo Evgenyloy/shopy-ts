@@ -1,10 +1,10 @@
-import { IOrder, IProduct } from "../../types/types";
+import type { IOrder, IProduct } from "../../types";
 import Spinner from "../spinner/Spinner";
 
 export function spinnerVisibility(
   databaseLoading: string,
   authentication: string,
-  item: IOrder[] | IProduct[]
+  item: IOrder[] | IProduct[],
 ) {
   if (
     (databaseLoading === "loading" || authentication === "loading") &&

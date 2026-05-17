@@ -1,11 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: { currentPage: number } = {
   currentPage: 1,
 };
 
 const paginationSlice = createSlice({
-  name: 'pagination',
+  name: "pagination",
   initialState,
   reducers: {
     changeCurrentPage: (state, action: PayloadAction<number>) => {

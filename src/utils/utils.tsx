@@ -1,17 +1,17 @@
-import { IOrder, IProduct } from '../types/types';
 import {
   removeFavoriteItem,
   addFavoriteItem,
   changeQuantity,
   removeOrder,
   addOrder,
-} from '../slices/userSlice';
-import { setEmailError, setPasswordError } from '../slices/errorFormSlice';
-import { AppDispatch } from '../types/types';
+} from "../slices/userSlice";
+import { setEmailError, setPasswordError } from "../slices/errorFormSlice";
+import type { IOrder, IProduct } from "../types";
+import type { AppDispatch } from "../types";
 
 export const checkAvailability = (
   item1: IOrder[] | IProduct[],
-  item2: IProduct
+  item2: IProduct,
 ) => {
   return item1.some((elem) => {
     return elem.id === item2?.id;
@@ -21,7 +21,7 @@ export const checkAvailability = (
 export const handleFavoriteClick = (
   favorites: IProduct[],
   item: IProduct,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
 ) => {
   return checkAvailability(favorites, item)
     ? dispatch(removeFavoriteItem(item.id))
@@ -32,7 +32,7 @@ export const handleBasketClick = (
   orders: IOrder[],
   product: IProduct,
   dispatch: AppDispatch,
-  value?: number
+  value?: number,
 ) => {
   if (checkAvailability(orders, product)) {
     dispatch(changeQuantity([product.id, 0]));
@@ -48,7 +48,7 @@ export const handleOrderClick = (
   orders: IOrder[],
   product: IProduct,
   dispatch?: AppDispatch,
-  value?: number
+  value?: number,
 ) => {
   if (dispatch === undefined) return;
   return (
@@ -62,7 +62,7 @@ export const handlePlusClick = (
   qty: number,
   setQty: (value: React.SetStateAction<number>) => void,
   dispatch: AppDispatch,
-  setPrice?: (value: React.SetStateAction<number>) => void
+  setPrice?: (value: React.SetStateAction<number>) => void,
 ) => {
   setQty(++qty);
   dispatch(changeQuantity([order.id, qty]));
@@ -75,7 +75,7 @@ export const handleMinusClick = (
   qty: number,
   setQty: (value: React.SetStateAction<number>) => void,
   dispatch: AppDispatch,
-  setPrice?: (value: React.SetStateAction<number>) => void
+  setPrice?: (value: React.SetStateAction<number>) => void,
 ) => {
   if (qty > 1) {
     setQty(--qty);
@@ -98,16 +98,16 @@ export function classSetting(
   favorites: IProduct[],
   orders: IOrder[],
   item: IProduct,
-  className: string
+  className: string,
 ) {
   let favoriteClass;
   favorites.some((favorite) => favorite.id === item?.id)
-    ? (favoriteClass = className + ' svg--red')
+    ? (favoriteClass = className + " svg--red")
     : (favoriteClass = className);
 
   let orderClass;
   orders.some((order) => order.id === item?.id)
-    ? (orderClass = className + ' svg--red')
+    ? (orderClass = className + " svg--red")
     : (orderClass = className);
 
   return { favoriteClass, orderClass };
@@ -116,8 +116,8 @@ export function classSetting(
 export function clearError(
   emailError: string,
   passError: string,
-  dispatch: AppDispatch
+  dispatch: AppDispatch,
 ) {
-  if (emailError) dispatch(setEmailError(''));
-  if (passError) dispatch(setPasswordError(''));
+  if (emailError) dispatch(setEmailError(""));
+  if (passError) dispatch(setPasswordError(""));
 }

@@ -1,5 +1,5 @@
 import { Rating } from "react-simple-star-rating";
-import { IProduct } from "../../types/types";
+import type { IProduct } from "../../types";
 import { Link } from "react-router-dom";
 import localProducts from "../../api/products.json";
 

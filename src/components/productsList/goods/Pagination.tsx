@@ -1,10 +1,11 @@
 import { changeCurrentPage } from "../../../slices/paginationSlice";
 import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import React from "react";
 import "./pagination.scss";
 
 interface IPaginationProps {
   totalProducts: number;
-  items: JSX.Element[];
+  items: React.JSX.Element[];
   productsPerPage: number;
 }
 
@@ -12,7 +13,7 @@ const Pagination = ({
   totalProducts,
   items,
   productsPerPage,
-}: IPaginationProps): JSX.Element | null => {
+}: IPaginationProps): React.JSX.Element | null => {
   const dispatch = useAppDispatch();
 
   const currentPage = useAppSelector((state) => state.pagination.currentPage);

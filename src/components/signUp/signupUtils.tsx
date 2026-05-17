@@ -1,4 +1,4 @@
-import { AppDispatch, IOrder, IProduct } from "../../types/types";
+import type { AppDispatch, IOrder, IProduct } from "../../types";
 import { setEmailError, setPasswordError } from "../../slices/errorFormSlice";
 import { doc, getFirestore, setDoc } from "firebase/firestore";
 
@@ -24,7 +24,7 @@ export async function saveInDataBase(
   email: string,
   id: string,
   orders: IOrder[],
-  favorites: IProduct[]
+  favorites: IProduct[],
 ) {
   const db = getFirestore();
   try {

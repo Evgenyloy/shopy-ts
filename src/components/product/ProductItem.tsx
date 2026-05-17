@@ -4,7 +4,7 @@ import { IoIosBasket } from "react-icons/io";
 import { HiPlusSmall, HiOutlineMinusSmall } from "react-icons/hi2";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../hooks/hooks";
-import { IProduct } from "../../types/types";
+import type { IProduct } from "../../types";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useState } from "react";
 import {

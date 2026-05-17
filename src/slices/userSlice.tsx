@@ -1,15 +1,16 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IProduct, IOrder } from '../types/types';
+import { createSlice } from "@reduxjs/toolkit";
+import type { IProduct, IOrder } from "../types";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const firebaseUserData = JSON.parse(
   localStorage.getItem(
-    'firebase:authUser:AIzaSyAWEVRT308MOF8Lo9_aRbLEdHbgLHcf65E:[DEFAULT]'
-  ) as string
+    "firebase:authUser:AIzaSyAWEVRT308MOF8Lo9_aRbLEdHbgLHcf65E:[DEFAULT]",
+  ) as string,
 );
-const userData = JSON.parse(localStorage.getItem('userData') as string);
+const userData = JSON.parse(localStorage.getItem("userData") as string);
 
 interface IInitialState {
-  user: { email: string; uid: string } | { email: ''; uid: '' } | null;
+  user: { email: string; uid: string } | { email: ""; uid: "" } | null;
   favorites: IProduct[];
   orders: IOrder[];
 }
@@ -17,20 +18,20 @@ interface IInitialState {
 const initialState: IInitialState = {
   user: firebaseUserData
     ? { email: firebaseUserData.email, uid: firebaseUserData.uid }
-    : { email: '', uid: '' },
+    : { email: "", uid: "" },
   favorites: userData ? userData.favorites : [],
   orders: userData ? userData.orders : [],
 };
 
 const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     setUser(state, action) {
       state.user = action.payload;
     },
     removeUser(state) {
-      state.user = { email: '', uid: '' };
+      state.user = { email: "", uid: "" };
     },
     addOrder: (state, action: PayloadAction<IProduct>) => {
       state.orders.push({
@@ -50,7 +51,7 @@ const userSlice = createSlice({
     },
     removeOrder: (state, action: PayloadAction<number>) => {
       state.orders = state.orders.filter(
-        (order) => order.id !== action.payload
+        (order) => order.id !== action.payload,
       );
     },
     changeQuantity: (state, action: PayloadAction<number[]>) => {
@@ -69,7 +70,7 @@ const userSlice = createSlice({
     },
     removeFavoriteItem: (state, action: PayloadAction<number>) => {
       state.favorites = state.favorites.filter(
-        (favorite: any) => favorite.id !== action.payload
+        (favorite: any) => favorite.id !== action.payload,
       );
     },
   },

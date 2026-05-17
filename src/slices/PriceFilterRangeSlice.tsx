@@ -1,4 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: { minPrice: number; maxPrice: number } = {
   minPrice: 0,
@@ -6,7 +7,7 @@ const initialState: { minPrice: number; maxPrice: number } = {
 };
 
 const rangeFilterSlice = createSlice({
-  name: 'priceFilter',
+  name: "priceFilter",
   initialState,
   reducers: {
     minPriceFilterChanged: (state, action: PayloadAction<number>) => {

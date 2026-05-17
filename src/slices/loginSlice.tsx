@@ -1,36 +1,37 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: {
   loginAuthenticationStatus: string;
   loadingDatabaseStatus: string;
   logout: boolean;
 } = {
-  loginAuthenticationStatus: 'idle',
-  loadingDatabaseStatus: 'idle',
+  loginAuthenticationStatus: "idle",
+  loadingDatabaseStatus: "idle",
   logout: false,
 };
 
 const spinnersSlice = createSlice({
-  name: 'login',
+  name: "login",
   initialState,
   reducers: {
     authenticationFetching: (state) => {
-      state.loginAuthenticationStatus = 'loading';
+      state.loginAuthenticationStatus = "loading";
     },
     authenticationFetched: (state) => {
-      state.loginAuthenticationStatus = 'idle';
+      state.loginAuthenticationStatus = "idle";
     },
     authenticationFetchingError: (state) => {
-      state.loginAuthenticationStatus = 'error';
+      state.loginAuthenticationStatus = "error";
     },
     databaseFetching: (state) => {
-      state.loadingDatabaseStatus = 'loading';
+      state.loadingDatabaseStatus = "loading";
     },
     databaseFetched: (state) => {
-      state.loadingDatabaseStatus = 'idle';
+      state.loadingDatabaseStatus = "idle";
     },
     databaseFetchingError: (state) => {
-      state.loadingDatabaseStatus = 'error';
+      state.loadingDatabaseStatus = "error";
     },
     setLogoutSpinner: (state, action: PayloadAction<boolean>) => {
       state.logout = action.payload;

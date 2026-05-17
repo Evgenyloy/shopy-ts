@@ -1,9 +1,9 @@
-import { IProduct } from "../../../types/types";
+import type { IProduct } from "../../../types";
 
 export function productRangeFilter(
   products: IProduct[],
   minPrice: number,
-  maxPrice: number
+  maxPrice: number,
 ) {
   const newProducts = products.filter((item) => {
     if (item.price < maxPrice && item.price > minPrice) {
@@ -16,7 +16,7 @@ export function productRangeFilter(
 
 export function productCategoryFilter(
   currentProducts: IProduct[],
-  categories: string
+  categories: string,
 ) {
   const items = currentProducts.filter((item) => {
     if (categories === "all") return currentProducts;

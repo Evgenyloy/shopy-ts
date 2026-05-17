@@ -1,19 +1,19 @@
-import { useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
   doc,
   getDoc,
   getFirestore,
   arrayUnion,
   updateDoc,
-} from 'firebase/firestore';
+} from "firebase/firestore";
 import {
   getAuth,
   signInWithEmailAndPassword,
   setPersistence,
   browserLocalPersistence,
-} from 'firebase/auth';
-import { setUser, setOrders, setFavoriteItems } from '../../slices/userSlice';
+} from "firebase/auth";
+import { setUser, setOrders, setFavoriteItems } from "../../slices/userSlice";
 import {
   authenticationFetched,
   authenticationFetching,
@@ -21,20 +21,20 @@ import {
   databaseFetched,
   databaseFetching,
   databaseFetchingError,
-} from '../../slices/loginSlice';
-import Form from '../form/Form';
-import { useAuth } from '../../hooks/hooks';
-import { IOrder, IProduct } from '../../types/types';
-import { errorsCheck } from './loginUtils';
-import { clearError } from '../../utils/utils';
+} from "../../slices/loginSlice";
+import Form from "../form/Form";
+import { useAuth } from "../../hooks/hooks";
+import type { IOrder, IProduct } from "../../types";
+import { errorsCheck } from "./loginUtils";
+import { clearError } from "../../utils/utils";
 
 async function updateUserInformation(
   email: string,
   orders: IOrder[],
-  favorites: IProduct[]
+  favorites: IProduct[],
 ) {
   const db = getFirestore();
-  const userRef = doc(db, 'users', `${email}`);
+  const userRef = doc(db, "users", `${email}`);
 
   await updateDoc(userRef, {
     orders: arrayUnion(...orders),
@@ -44,7 +44,7 @@ async function updateUserInformation(
 
 async function getOrders(email: string) {
   const db = getFirestore();
-  const docRef = doc(db, 'users', `${email}`);
+  const docRef = doc(db, "users", `${email}`);
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
@@ -52,7 +52,7 @@ async function getOrders(email: string) {
     return docSnap.data();
   } else {
     // docSnap.data() will be undefined in this case
-    alert('No such document!');
+    alert("No such document!");
   }
 }
 
@@ -82,8 +82,8 @@ function Login() {
                     dispatch(setFavoriteItems(data?.favorites as IProduct[]));
                     dispatch(authenticationFetched());
                     dispatch(databaseFetched());
-                    localStorage.removeItem('userData');
-                    navigate('/');
+                    localStorage.removeItem("userData");
+                    navigate("/");
                   })
                   .catch((data: Error) => {
                     dispatch(databaseFetchingError());

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { BsXLg } from "react-icons/bs";
 import { removeOrder } from "../../slices/userSlice";
-import { IOrder } from "../../types/types";
+import type { IOrder } from "../../types";
 import { handlePlusClick, handleMinusClick } from "../../utils/utils";
 import localProducts from "../../api/products.json";
 

@@ -1,10 +1,10 @@
 import { doc, getFirestore, updateDoc } from "firebase/firestore";
-import { IOrder, IProduct } from "../../types/types";
+import type { IOrder, IProduct } from "../../types";
 
 export const updateUserInformation = async (
   user: any,
   orders: IOrder[],
-  favorites: IProduct[]
+  favorites: IProduct[],
 ) => {
   if (!user) return;
   const db = getFirestore();
