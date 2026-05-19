@@ -23,9 +23,9 @@
 
 | Категория   | Технологии                                                       |
 | ----------- | ---------------------------------------------------------------- |
-| Фронтенд    | React 18, TypeScript, Redux Toolkit, RTK Query, React Router Dom |
+| Фронтенд    | React 19, TypeScript, Redux Toolkit, RTK Query, React Router Dom |
 | API         | FakeStoreAPI, Firebase Auth, Cloud Firestore                     |
-| Инструменты | CRA                                                              |
+| Инструменты | VITE                                                             |
 
 ## Запуск
 

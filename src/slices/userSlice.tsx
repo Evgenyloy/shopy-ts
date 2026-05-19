@@ -4,7 +4,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 
 const firebaseUserData = JSON.parse(
   localStorage.getItem(
-    "firebase:authUser:AIzaSyAWEVRT308MOF8Lo9_aRbLEdHbgLHcf65E:[DEFAULT]",
+    "firebase:authUser:AIzaSyAGOd-276sMPcDv87Dx2r9Mobd2ljlS6GQ:[DEFAULT]",
   ) as string,
 );
 const userData = JSON.parse(localStorage.getItem("userData") as string);

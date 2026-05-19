@@ -16,10 +16,10 @@ const HeaderTools = ({ handleClick }: IHeaderToolsProps) => {
   const { user, orders, favorites, isAuth } = useAuth();
   const dispatch = useAppDispatch();
   const databaseLoading = useAppSelector(
-    (store) => store.login.loadingDatabaseStatus
+    (store) => store.login.loadingDatabaseStatus,
   );
   const authentication = useAppSelector(
-    (state) => state.login.loginAuthenticationStatus
+    (state) => state.login.loginAuthenticationStatus,
   );
   const logoutSpinner = useAppSelector((state) => state.login.logout);
   const { emailError, passError } = useAppSelector((state) => state.error);
@@ -70,6 +70,7 @@ const HeaderTools = ({ handleClick }: IHeaderToolsProps) => {
       <p className="header-tools__user">
         {logoutSpinner ? "logout..." : null}
         {user && !logoutSpinner ? user?.email : null}
+        {user?.email === "" ? "Guest" : null}
       </p>
     </div>
   );

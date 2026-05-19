@@ -4,6 +4,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import { RxCross1 } from "react-icons/rx";
 import { BsCurrencyDollar } from "react-icons/bs";
+import { Tooltip } from "react-tooltip";
 import { useAuth } from "../../../hooks/hooks";
 import { Rating } from "react-simple-star-rating";
 import type { IProduct } from "../../../types";
@@ -72,6 +73,8 @@ const GoodsItem = ({ item, cross }: IGoodsItemProps) => {
           className="goods__svg-link"
           to={"/checkout"}
           onClick={() => handleOrderClick(orders, item, dispatch, qty)}
+          data-tooltip-id="checkout-tooltip"
+          data-tooltip-content="Добавить в корзину и перейти к оформлению"
         >
           <BsCurrencyDollar
             className="goods__heart-svg"
@@ -85,6 +88,7 @@ const GoodsItem = ({ item, cross }: IGoodsItemProps) => {
         className="goods__link"
         onClick={() => window.scrollTo(0, 0)}
       ></Link>
+      <Tooltip id="checkout-tooltip" place="top" />
       {cross && (
         <RxCross1
           className="goods__item-cross"

@@ -43,6 +43,8 @@ function renderItems(products: IProduct[]) {
   });
 }
 
+import { useEffect } from "react";
+
 function Goods() {
   const {
     data: products = [],
@@ -69,13 +71,17 @@ function Goods() {
     ),
     radioFilter,
   );
+
   const itemsView = renderItems(
     (filteredItems as IProduct[]).slice(firstProductIndex, lastProductIndex),
   );
 
-  if (itemsView.length === 0 && isSuccess) {
-    dispatch(changeCurrentPage(1));
-  }
+ 
+  useEffect(() => {
+    if ((filteredItems as IProduct[]).length === 0 && isSuccess) {
+      dispatch(changeCurrentPage(1));
+    }
+  }, [(filteredItems as IProduct[]).length, isSuccess, dispatch]);
 
   return (
     <div className="goods">
