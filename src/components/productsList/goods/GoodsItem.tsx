@@ -83,11 +83,7 @@ const GoodsItem = ({ item, cross }: IGoodsItemProps) => {
         </Link>
       </div>
 
-      <Link
-        to={`/product/${item.id}`}
-        className="goods__link"
-        onClick={() => window.scrollTo(0, 0)}
-      ></Link>
+      <Link to={`/product/${item.id}`} className="goods__link"></Link>
       <Tooltip id="checkout-tooltip" place="top" />
       {cross && (
         <RxCross1

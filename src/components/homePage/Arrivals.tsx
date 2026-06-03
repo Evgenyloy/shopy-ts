@@ -33,11 +33,7 @@ function Arrivals() {
         {isSuccess && <ArrivalsItemsView items={items} />}
       </div>
       <div className="arrivals__btn-cont">
-        <Link
-          to="/products"
-          className="arrivals__btn-link"
-          onClick={() => window.scrollTo(0, 0)}
-        >
+        <Link to="/products" className="arrivals__btn-link">
           see all
         </Link>
       </div>

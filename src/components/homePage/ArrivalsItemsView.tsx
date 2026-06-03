@@ -25,11 +25,7 @@ function ArrivalsItemsView({ items }: ArrivalsItemsViewProps) {
           </div>
           <h2 className="arrivals__item-title">{item.title}</h2>
           <p className="arrivals__item-price">{item.price + " $"}</p>
-          <Link
-            to={`/product/${item.id}`}
-            className="arrivals__link"
-            onClick={() => window.scrollTo(0, 0)}
-          ></Link>
+          <Link to={`/product/${item.id}`} className="arrivals__link"></Link>
         </div>
       ))}
     </>

@@ -37,11 +37,7 @@ function BestSalesView({ products }: BestSalesViewProps) {
               />
             </div>
           </div>
-          <Link
-            className="best-sales__link"
-            to={`/product/${item.id}`}
-            onClick={() => window.scrollTo(0, 0)}
-          ></Link>
+          <Link className="best-sales__link" to={`/product/${item.id}`}></Link>
         </div>
       ))}
     </>

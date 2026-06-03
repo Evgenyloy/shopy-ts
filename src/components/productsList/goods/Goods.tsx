@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../../hooks/hooks";
 import Pagination from "./Pagination";
 import GoodsItem from "./GoodsItem";
@@ -43,8 +43,6 @@ function renderItems(products: IProduct[]) {
   });
 }
 
-import { useEffect } from "react";
-
 function Goods() {
   const {
     data: products = [],
@@ -76,7 +74,6 @@ function Goods() {
     (filteredItems as IProduct[]).slice(firstProductIndex, lastProductIndex),
   );
 
- 
   useEffect(() => {
     if ((filteredItems as IProduct[]).length === 0 && isSuccess) {
       dispatch(changeCurrentPage(1));

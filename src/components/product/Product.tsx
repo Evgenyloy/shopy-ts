@@ -4,6 +4,7 @@ import Spinner from "../spinner/Spinner";
 import NewsLetter from "../newsLetter/NewsLetter";
 import ProductItem from "./ProductItem";
 import "./product.scss";
+import { useEffect } from "react";
 
 const Product = () => {
   const { id } = useParams();
@@ -13,6 +14,10 @@ const Product = () => {
     isError,
     isSuccess,
   } = useGetASingleProductQuery(id as string);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   return (
     <>
