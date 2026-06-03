@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "../../hooks/hooks";
 import { updateUserInformation } from "./useUserData";
@@ -25,7 +25,7 @@ function App() {
 
     localStorage.setItem(
       "userData",
-      JSON.stringify({ orders, favorites, email: "", uid: "" })
+      JSON.stringify({ orders, favorites, email: "", uid: "" }),
     );
   }, [orders, favorites]);
 
